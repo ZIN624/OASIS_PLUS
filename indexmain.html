@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OASIS予約フォーム</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; margin: 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  <h1>予約フォーム</h1>
+  <form id="reservationForm">
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" id="name" name="name" placeholder="例: 山田 太郎" required>
+    </div>
+    <div class="form-group">
+      <label for="date">希望日時</label>
+      <input type="datetime-local" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="stylist">スタイリスト</label>
+      <select id="stylist" name="stylist" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="岡崎仁渡">岡崎仁渡【ディレクター】</option>
+        <option value="岡崎菜月">岡崎菜月【チーフ】</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="menu">メニュー</label>
+      <select id="menu" name="menu" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="カットエステ">カットエステ</option>
+        <option value="カラーケア">カラーケア</option>
+        <option value="ストレートケア">ストレートケア</option>
+        <option value="トリートメントケア">トリートメントケア</option>
+        <option value="パーマケア">パーマケア</option>
+        <option value="その他">その他</option>
+      </select>
+    </div>
+    <div class="form-group" id="menuOtherGroup" style="display: none;">
+      <label for="menuOther">その他メニューの詳細</label>
+      <input type="text" id="menuOther" name="menuOther" placeholder="例: 特別なリクエストを記入してください">
+    </div>
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="tel" id="phone" name="phone" placeholder="例: 09012345678" pattern="^[0-9]{10,11}$" required>
+    </div>
+    <div class="form-group">
+      <label for="other">その他</label>
+      <textarea id="other" name="other" placeholder="ご希望や質問などあれば記入してください"></textarea>
+    </div>
+    <button type="submit">送信</button>
+  </form>
+
+  <script src="https://static.line-scdn.net/liff/2/sdk.js"></script>
+  <script>
+    // LIFF初期化
+    let userId = null;
+
+    liff.init({ liffId: '2006595194-AkL3pQ0D' })
+      .then(() => {
+        // LIFFが初期化されたらユーザーIDを取得
+        liff.getProfile().then(profile => {
+          userId = profile.userId; // ユーザーIDを取得
+          console.log('ユーザーID:', userId);
+        }).catch(err => console.error('ユーザー情報取得エラー:', err));
+      })
+      .catch(err => console.error('LIFF初期化エラー:', err));
+
+    // その他メニューが選択された場合のフォーム表示
+    document.getElementById('menu').addEventListener('change', function () {
+      const menuOtherGroup = document.getElementById('menuOtherGroup');
+      if (this.value === 'その他') {
+        menuOtherGroup.style.display = 'block';
+      } else {
+        menuOtherGroup.style.display = 'none';
+      }
+    });
+
+    // フォーム送信処理
+    document.getElementById('reservationForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // フォームデータを取得
+      const formData = {
+        name: document.getElementById('name').value,
+        date: document.getElementById('date').value,
+        stylist: document.getElementById('stylist').value,
+        menu: document.getElementById('menu').value,
+        menuOther: document.getElementById('menuOther').value || 'なし',
+        phone: document.getElementById('phone').value,
+        other: document.getElementById('other').value || 'なし'
+      };
+
+      // LINEメッセージを送信
+      if (userId) {
+        const message = {
+          to: userId,
+          messages: [{
+            type: 'text',
+            text: `予約完了\nお名前: ${formData.name}\n希望日時: ${formData.date}\nスタイリスト: ${formData.stylist}\nメニュー: ${formData.menu}\nその他メニュー: ${formData.menuOther}\n電話番号: ${formData.phone}\nその他: ${formData.other}`
+          }]
+        };
+
+        fetch('https://api.line.me/v2/bot/message/push', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer I4rysPKJTqRGOuosl7ifpOaqlkK1kxf1Wzri6H3daHSyUEM720ZNzsRBP9dSdRv9iq+UbfLCzkVtZVU5ExVKJKrnO54x9TDoGNgAzeiVXN+Jjtk4nfOAXScUBxda+AagtQEfoY32brbfXwmABiCWHQdB04t89/1O/w1cDnyilFU=`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(message)
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('予約が完了しました！LINEに戻ります。');
+            liff.closeWindow(); // LINEに戻る
+          } else {
+            alert('エラーが発生しました。もう一度お試しください。');
+          }
+        })
+        .catch(err => console.error('メッセージ送信エラー:', err));
+      } else {
+        alert('ユーザー情報が取得できませんでした。LINEにログインしてください。');
+      }
+    });
+  </script>
+</body>
+</html>
