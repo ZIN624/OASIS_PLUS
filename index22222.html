@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OASIS予約フォーム</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; margin: 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+    #confirmationMessage { display: none; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>予約フォーム</h1>
+  <form id="reservationForm">
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" id="name" name="name" placeholder="例: 山田 太郎" required>
+    </div>
+    <div class="form-group">
+      <label for="date">希望日時</label>
+      <input type="datetime-local" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="stylist">スタイリスト</label>
+      <select id="stylist" name="stylist" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="岡崎仁渡">岡崎仁渡【ディレクター】</option>
+        <option value="岡崎菜月">岡崎菜月【チーフ】</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="menu">メニュー</label>
+      <select id="menu" name="menu" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="カットエステ">カットエステ</option>
+        <option value="カラーケア">カラーケア</option>
+        <option value="ストレートケア">ストレートケア</option>
+        <option value="トリートメントケア">トリートメントケア</option>
+        <option value="パーマケア">パーマケア</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="tel" id="phone" name="phone" placeholder="例: 09012345678" pattern="^[0-9]{10,11}$" required>
+    </div>
+    <div class="form-group">
+      <label for="other">その他</label>
+      <textarea id="other" name="other" placeholder="ご希望や質問などあれば記入してください"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="coupon">クーポン番号</label>
+      <input type="text" id="coupon" name="coupon" placeholder="例: 12345">
+    </div>
+    <button type="submit">送信</button>
+  </form>
+
+  <!-- 完了メッセージ -->
+  <div id="confirmationMessage">
+    <p>予約が完了しました！</p>
+    <button onclick="redirectToLine()">LINEに戻る</button>
+  </div>
+
+  <script>
+    document.getElementById('reservationForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // フォームのデータを取得
+      const formData = {
+        name: document.getElementById('name').value,
+        date: document.getElementById('date').value,
+        stylist: document.getElementById('stylist').value,
+        menu: document.getElementById('menu').value,
+        phone: document.getElementById('phone').value,
+        other: document.getElementById('other').value,
+        coupon: document.getElementById('coupon').value
+      };
+
+      // 入力内容を検証
+      if (!formData.stylist || !formData.menu) {
+        alert("スタイリストまたはメニューが選択されていません。");
+        return;
+      }
+
+      // LINEに送信するための処理 (LIFF APIを使用)
+      const sendLineMessage = (message) => {
+        const channelAccessToken = 'I4rysPKJTqRGOuosl7ifpOaqlkK1kxf1Wzri6H3daHSyUEM720ZNzsRBP9dSdRv9iq+UbfLCzkVtZVU5ExVKJKrnO54x9TDoGNgAzeiVXN+Jjtk4nfOAXScUBxda+AagtQEfoY32brbfXwmABiCWHQdB04t89/1O/w1cDnyilFU='; // 実際のアクセストークンに置き換えてください
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${channelAccessToken}`,
+        };
+
+        const body = JSON.stringify({
+          to: 'LINE_USER_ID',  // 実際のユーザーIDに置き換えてください
+          messages: [{ type: 'text', text: message }]
+        });
+
+        fetch('https://api.line.me/v2/bot/message/push', {
+          method: 'POST',
+          headers: headers,
+          body: body,
+        })
+        .then((response) => response.json())
+        .then((data) => console.log('Message sent:', data))
+        .catch((error) => console.error('Error:', error));
+      };
+
+      const message = `新しい予約が入りました:\n
+名前: ${formData.name}\n
+希望日時: ${formData.date}\n
+スタイリスト: ${formData.stylist}\n
+メニュー: ${formData.menu}\n
+電話番号: ${formData.phone}\n
+その他: ${formData.other}`;
+
+      sendLineMessage(message);
+
+      // 予約完了メッセージ表示
+      document.getElementById('confirmationMessage').style.display = 'block';
+    });
+
+    function redirectToLine() {
+      // LINEに戻るためのURL（LINEアプリのURLスキーム）
+      window.location.href = 'line://';
+    }
+  </script>
+</body>
+</html>
