@@ -1,88 +1,79 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>筋トレ管理</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予約フォーム</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; margin: 20px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input, select, textarea { width: 100%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #45a049; }
+  </style>
 </head>
 <body>
+  <h1>予約フォーム</h1>
+  <form id="reservationForm">
+    <div class="form-group">
+      <label for="name">名前</label>
+      <input type="text" id="name" name="name" placeholder="例: 山田 太郎" required>
+    </div>
+    <div class="form-group">
+      <label for="date">希望日時</label>
+      <input type="datetime-local" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="stylist">スタイリスト</label>
+      <select id="stylist" name="stylist" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="岡崎仁渡">岡崎仁渡</option>
+        <option value="岡崎菜月">岡崎菜月</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="menu">メニュー</label>
+      <select id="menu" name="menu" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="カット">カット</option>
+        <option value="カラー">カラー</option>
+        <option value="縮毛矯正">縮毛矯正</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="phone">電話番号</label>
+      <input type="tel" id="phone" name="phone" placeholder="例: 09012345678" required>
+    </div>
+    <div class="form-group">
+      <label for="other">その他</label>
+      <textarea id="other" name="other" placeholder="ご希望や質問などあれば記入してください"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="coupon">クーポン番号</label>
+      <input type="text" id="coupon" name="coupon" placeholder="例: 12345">
+    </div>
+    <button type="submit">送信</button>
+  </form>
 
-    <form class="w-75 mx-auto">
-        <p class="mt-3">名前</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="" required>
-        </div>
-        <p class="mt-3">腕立て</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="udetate" required>
-        </div>
-        <p class="mt-3">腹筋</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="fukkin" required>
-        </div>
-        <p class="mt-3">背筋</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="haikin" required>
-        </div>
-        <p class="mt-3">スクワット</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="sukuwat" required>
-        </div>
-        <input type="submit" class="mt-4 btn btn-primary" value="送信">
-    </form>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script>
-        
-        $(document).ready(function () {
-            const liffId = "2006595194-AkL3pQ0D";
-            initializeLiff(liffId);
-        })
+  <script>
+    document.getElementById('reservationForm').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
+      // フォームのデータを取得
+      const formData = {
+        name: document.getElementById('name').value,
+        date: document.getElementById('date').value,
+        stylist: document.getElementById('stylist').value,
+        menu: document.getElementById('menu').value,
+        phone: document.getElementById('phone').value,
+        other: document.getElementById('other').value,
+        coupon: document.getElementById('coupon').value
+      };
 
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
-        
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
-
-        $(function () {
-            $('form').submit(function () {
-                const name    = $('input[name="name"]').val();
-                const udetate = $('input[name="udetate"]').val();
-                const fukkin  = $('input[name="fukkin"]').val();
-                const haikin  = $('input[name="haikin"]').val();
-                const sukuwat = $('input[name="sukuwat"]').val();
-                const msg = `${name}\n${udetate}\n${fukkin}\n${haikin}\n${sukuwat}`;
-                sendText(msg);
-                return false;
-            });
-        });
-
-    </script>
-
+      // LINEに送信するための処理 (LIFF APIを使用)
+      alert("以下の内容で送信します: \n" + JSON.stringify(formData, null, 2));
+    });
+  </script>
 </body>
 </html>
