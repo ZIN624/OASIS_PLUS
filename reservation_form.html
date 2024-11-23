@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予約フォーム</title>
+  <style>
+    /* 基本的なスタイル */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+  
+    h1 {
+      text-align: center;
+      color: #FFF;
+      margin-top: 20px;
+      background-color: #4CAF50;
+    }
+  
+    /* タイトルのスタイル */
+    .title {
+      font-size: 1.6em;
+      color: #4CAF50;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    /* 日付入力フォームのスタイル */
+    .date-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    /* 入力フィールドラッパー */
+    .input-wrapper {
+      margin-bottom: 15px;
+    }
+  
+    /* 入力ラベルのスタイル */
+    .input-label {
+      font-size: 1.6em;
+      color: #4CAF50;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    /* 入力フィールド、セレクトボックス、テキストエリアのスタイル */
+    .input-select,
+    .input-field,
+    .input-textarea {
+      font-size: 1em;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease;
+    }
+  
+    /* フォーカス時のスタイル */
+    .input-select:focus,
+    .input-field:focus,
+    .input-textarea:focus {
+      outline: none;
+      border-color: #4CAF50;
+      background-color: #fff;
+    }
+  
+    /* セレクトボックス内のオプションのパディング */
+    .input-select option {
+      padding: 10px;
+    }
+  
+    /* テキストエリアの高さ調整 */
+    .input-textarea {
+      height: 100px;
+      resize: vertical;
+    }
+  
+    /* 入力フィールドとセレクトボックスのフォーカス時のスタイル */
+    .input-wrapper select:focus,
+    .input-wrapper input:focus {
+      border-color: #388E3C;
+    }
+  
+    /* ボタンの基本スタイル */
+  button {
+    padding: 12px 24px; /* ボタンの内側の余白 */
+    font-size: 1em; /* フォントサイズ */
+    background-color: #4CAF50; /* 背景色 */
+    color: white; /* テキスト色 */
+    border: none; /* 枠線をなしに */
+    border-radius: 8px; /* 丸みのある角 */
+    cursor: pointer; /* ポインタに変化 */
+    width: 100%; /* ボタンを親要素いっぱいに広げる */
+
+  
+    /* レスポンシブ対応 */
+    @media (max-width: 600px) {
+      .date-container {
+        padding: 15px;
+      }
+    }
+  </style>
+  
+</head>
+
+<body>
+  <img src="c:\Users\masat\OneDrive\デスクトップ\00.jpg" >
+  
+
+  <h1>OASIS予約フォーム</h1>
+
+  <form id="reservationForm">
+  <!-- 名前 -->
+  <h2 class="title">予約者名</h2>
+  <div class="date-container">
+  <div class="input-wrapper">
+    <label for="name" class="input-label">予約者名:</label>
+    <input type="text" id="name" name="name" placeholder="オアシス太郎" class="input-field" required><br><br>
+  </div>
+  </div>
+
+<!-- 希望1 -->
+<h2 class="title">1KIBOU1</h2>
+<div class="date-container">
+  <div class="input-wrapper">
+    <label for="month1" class="input-label">月:</label>
+    <select id="month1" name="month1" class="input-select" required>
+      <option value="1">1月</option>
+      <option value="2">2月</option>
+      <option value="3">3月</option>
+      <option value="4">4月</option>
+      <option value="5">5月</option>
+      <option value="6">6月</option>
+      <option value="7">7月</option>
+      <option value="8">8月</option>
+      <option value="9">9月</option>
+      <option value="10">10月</option>
+      <option value="11">11月</option>
+      <option value="12">12月</option>
+    </select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="day1" class="input-label">日:</label>
+    <select id="day1" name="day1" class="input-select" required></select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="time1" class="input-label">時間:</label>
+    <select id="time1" name="time1" class="input-select" required>
+      <option value="9:00">9:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+      <option value="18:00">18:00</option>
+    </select>
+  </div>
+</div>
+
+<!-- 同様に希望2、希望3を追加 -->
+
+
+<!-- 希望2 -->
+<h2 class="title">第2希望</h2>
+<div class="date-container">
+  <div class="input-wrapper">
+    <label for="month2" class="input-label">月:</label>
+    <select id="month2" name="month2" class="input-select" required>
+      <option value="1">1月</option>
+      <option value="2">2月</option>
+      <option value="3">3月</option>
+      <option value="4">4月</option>
+      <option value="5">5月</option>
+      <option value="6">6月</option>
+      <option value="7">7月</option>
+      <option value="8">8月</option>
+      <option value="9">9月</option>
+      <option value="10">10月</option>
+      <option value="11">11月</option>
+      <option value="12">12月</option>
+    </select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="day2" class="input-label">日:</label>
+    <select id="day2" name="day1" class="input-select" required></select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="time2" class="input-label">時間:</label>
+    <select id="time2" name="time1" class="input-select" required>
+      <option value="9:00">9:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+      <option value="18:00">18:00</option>
+    </select>
+  </div>
+</div>
+
+<!-- 希望3 -->
+<h2 class="title">第3希望</h2>
+<div class="date-container">
+  <div class="input-wrapper">
+    <label for="month3" class="input-label">月:</label>
+    <select id="month3" name="month3" class="input-select" required>
+      <option value="1">1月</option>
+      <option value="2">2月</option>
+      <option value="3">3月</option>
+      <option value="4">4月</option>
+      <option value="5">5月</option>
+      <option value="6">6月</option>
+      <option value="7">7月</option>
+      <option value="8">8月</option>
+      <option value="9">9月</option>
+      <option value="10">10月</option>
+      <option value="11">11月</option>
+      <option value="12">12月</option>
+    </select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="day3" class="input-label">日:</label>
+    <select id="day3" name="day1" class="input-select" required></select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="time3" class="input-label">時間:</label>
+    <select id="time3" name="time3" class="input-select" required>
+      <option value="9:00">9:00</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+      <option value="13:00">13:00</option>
+      <option value="14:00">14:00</option>
+      <option value="15:00">15:00</option>
+      <option value="16:00">16:00</option>
+      <option value="17:00">17:00</option>
+      <option value="18:00">18:00</option>
+    </select>
+  </div>
+</div>
+
+
+ <!-- メニュー -->
+ <h2 class="title">メニュー選択:</h2>
+ <div class="date-container">
+   <div class="input-wrapper">
+     <label for="menu" class="input-label">メニュー:</label>
+     <select id="menu" name="menu" class="input-select" required>
+       <option value="cut_esthetic">カット & エステ</option>
+       <option value="color_care">カラーケア</option>
+       <option value="straight_care">ストレートケア</option>
+       <option value="treatment_care">トリートメントケア</option>
+       <option value="perm_care">パーマケア</option>
+       <option value="other">その他</option>
+     </select>
+   </div>
+ </div>
+
+  <!-- "その他"メニュー -->
+  <div id="otherMenuWrapper" style="display:none;">
+    <div class="input-wrapper">
+      <label for="otherMenu" class="input-label">その他メニュー:</label>
+      <textarea id="otherMenu" name="otherMenu" class="input-textarea" placeholder="その他のメニューを入力してください"></textarea>
+    </div>
+  </div>
+
+  <!-- スタッフ -->
+  <h2 class="title">担当スタイリスト:</h2>
+  <div class="date-container">
+    <div class="input-wrapper">
+      <label for="staff" class="input-label">スタイリスト:</label>
+      <select id="staff" name="staff" class="input-select" required>
+        <option value="no_preference">指定なし</option>
+        <option value="masato_okazaki">岡崎仁渡 (ディレクター)</option>
+        <option value="natsuki_okazaki">岡崎菜月(チーフ)</option>
+        
+      </select>
+    </div>
+  </div>
+
+   <!-- 電話番号 -->
+   <h2 class="title">電話番号:</h2>
+   <div class="date-container">
+     <div class="input-wrapper">
+       <label for="phone" class="input-label">電話番号:</label>
+       <input type="tel" id="phone" name="phone" placeholder="電話番号" class="input-field" required>
+     </div>
+   </div>
+
+  <!-- 備考 -->
+  <h2 class="title">備考:</h2>
+  <div class="date-container">
+    <div class="input-wrapper">
+      <label for="comments" class="input-label">ご要望・コメント:</label>
+      <textarea id="comments" name="comments" class="input-field" rows="4" placeholder="ご要望があればご記入ください"></textarea>
+    </div>
+  </div>
+  <button type="submit">送信</button>
+</form>
+
+<script>
+  // 月と日の選択肢を制御する関数
+  function updateDays(monthSelectId, daySelectId) {
+    const month = document.getElementById(monthSelectId).value;
+    const daySelect = document.getElementById(daySelectId);
+
+    // 日付をリセット
+    daySelect.innerHTML = '';
+
+    // 月ごとに日数を制限
+    let maxDays;
+    switch (month) {
+      case '2':
+        maxDays = 28; // 2月（非うるう年）
+        break;
+      case '4':
+      case '6':
+      case '9':
+      case '11':
+        maxDays = 30; // 30日までの月
+        break;
+      default:
+        maxDays = 31; // 31日までの月
+    }
+
+    // 日数の選択肢を作成
+    for (let i = 1; i <= maxDays; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.text = `${i}日`;
+      daySelect.appendChild(option);
+    }
+  }
+
+  // 月が変更された時に日付の選択肢を更新
+  const monthSelectors = ['month1', 'month2', 'month3'];
+  const daySelectors = ['day1', 'day2', 'day3'];
+
+  monthSelectors.forEach((monthSelectorId, index) => {
+    document.getElementById(monthSelectorId).addEventListener("change", function() {
+      updateDays(monthSelectorId, daySelectors[index]);
+    });
+
+    // 初期化
+    updateDays(monthSelectorId, daySelectors[index]);
+  });
+
+   // メニューが「その他」選ばれた時に入力フィールドを表示
+   const menuSelect = document.getElementById('menu');
+    const otherMenuInput = document.getElementById('otherMenuInput');
+
+    menuSelect.addEventListener('change', function() {
+      if (menuSelect.value === 'その他') {
+        otherMenuInput.style.display = 'block'; // 表示
+      } else {
+        otherMenuInput.style.display = 'none'; // 非表示
+      }
+    });
+
+    // 初期状態では「その他」の入力フィールドは非表示
+    if (menuSelect.value !== 'その他') {
+      otherMenuInput.style.display = 'none';
+    }
+
+
+  document.getElementById("reservationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const formData = new FormData(event.target);
+    const reservationData = Object.fromEntries(formData.entries());
+
+    // サーバーに送信
+    fetch("https://your-backend-url.com/line-notify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(reservationData)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("予約内容が送信されました！");
+      } else {
+        alert("送信に失敗しました。");
+      }
+    })
+    .catch(error => {
+      console.error("エラー:", error);
+      alert("エラーが発生しました。");
+    });
+  });
+</script>
+</body>
+</html>
