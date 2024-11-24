@@ -63,13 +63,14 @@
     }
     button {
       padding: 12px;
-      font-size: 1em;
+      font-size: 1.5em;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       width: 100%;
+      height: 100px;
     }
     button:hover {
       background-color: #45a049;
@@ -82,7 +83,6 @@
 </head>
 
 <body>
-  <img src="c:\Users\masat\OneDrive\デスクトップ\00.jpg" >
   
 
   <h1>OASIS予約フォーム</h1>
@@ -283,7 +283,8 @@
       <textarea id="comments" name="comments" class="input-field" rows="4" placeholder="ご要望があればご記入ください"></textarea>
     </div>
   </div>
-  <button type="submit">予約希望を送信する</button>
+  <button onclick="sendMessageToAdmin()">予約希望を送信</button>
+
 </form>
 
 <script>
@@ -342,29 +343,37 @@
 
    // LIFF SDK初期化
 liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
-  // フォームから選択した内容を取得
-  const selectedMenu = document.getElementById('menu').value;
-  const selectedStaff = document.getElementById('staff').value;
+// フォーム送信処理（例）
+function sendMessageToAdmin() {
+    // フォームから選択された内容を取得する（例）
+    const name = document.getElementById('name').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const menu = document.getElementById('menu').value;
+    const staff = document.getElementById('staff').value;
 
-  // 送信ボタンがクリックされた時
-  document.getElementById('submit').addEventListener('click', () => {
-    // LINE管理者に送信するメッセージを作成
-    const message = `予約内容: メニュー - ${selectedMenu}, スタッフ - ${selectedStaff}`;
+    // 管理者に送信するメッセージを作成
+    const message = `予約内容:\n名前: ${name}\n日付: ${date}\n時間: ${time}\nメニュー: ${menu}\nスタッフ: ${staff}`;
 
-    // メッセージを送信
-    liff.sendMessages([{
-      type: 'text',
-      text: message
-    }]).then(() => {
-      alert("予約内容が送信されました。");
-    }).catch((error) => {
-      console.error("メッセージ送信に失敗しました: ", error);
+    // LINE Messaging APIを使用してメッセージを送信（ここではLINE APIのリクエスト処理）
+    fetch("https://your-backend-url.com/line-notify", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('送信成功:', data);
+        // 送信が成功したらLIFFウィンドウを閉じてトーク画面に戻る
+        liff.closeWindow();
+    })
+    .catch(error => {
+        console.error('送信エラー:', error);
+        // 送信に失敗した場合のエラーハンドリング
     });
-  });
-}).catch((error) => {
-  console.error("LIFF初期化エラー: ", error);
-});
-
+}
 
 </script>
 </body>
