@@ -283,10 +283,10 @@
       <textarea id="comments" name="comments" class="input-field" rows="4" placeholder="ご要望があればご記入ください"></textarea>
     </div>
   </div>
-  <button onclick="sendMessageToAdmin()">予約希望を送信</button>
+  <button onclick="sendMessage()">予約希望を送信</button>
 
 </form>
-
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
 <script>
   // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
   function populateDays() {
@@ -387,17 +387,19 @@
       const message = `予約内容:\n名前: ${name}\n第1希望: ${month1}月 ${day1}日 ${time1}時\nメニュー: ${menu}\nスタイリスト: ${staff}`;
 
       // 送信メッセージの作成
+      function sendMessage() {
       liff.sendMessages([{
         type: 'text',
         text: message
       }]).then(() => {
         alert("予約内容が送信されました。");
-
+      
         // 送信後、LIFFウィンドウを閉じる
         liff.closeWindow();
       }).catch((error) => {
         console.error("メッセージ送信に失敗しました: ", error);
       });
+    }
     });
   }).catch((error) => {
     console.error("LIFF初期化エラー: ", error);
