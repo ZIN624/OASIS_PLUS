@@ -34,3 +34,12 @@ window.addEventListener('load', function() {
   updateDays(parseInt(document.getElementById("month2").value), "day2");
   updateDays(parseInt(document.getElementById("month3").value), "day3");
 });
+ function toggleOtherInput() {
+    const menu = document.getElementById("menu");
+    const otherInputContainer = document.getElementById("other-input-container");
+    if (menu.value === "other") {
+      otherInputContainer.style.display = "block";
+    } else {
+      otherInputContainer.style.display = "none";
+    }
+  }
