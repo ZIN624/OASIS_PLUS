@@ -383,31 +383,42 @@ liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
         // 管理者に送信するメッセージを作成
         const message = `予約内容:\n名前: ${name}\n日付: ${date}\n時間: ${time}\nメニュー: ${menu}\nスタッフ: ${staff}`;
 
-        // LIFF SDKの初期化
-liff.init({ liffId: "2006595194-AkL3pQ0D" })
-  .then(() => {
-    // フォームの選択内容を取得
-    const selectedMenu = document.getElementById('menu').value;
+        // LIFF SDK初期化
+  liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
 
-    // 送信ボタンがクリックされた時
-    document.getElementById('submit').addEventListener('click', () => {
-      liff.sendMessages([{
-        type: 'text',
-        text: `予約内容: ${selectedMenu}が選択されました。`
-      }]).then(() => {
-        alert("予約内容が送信されました。");
-      }).catch((error) => {
-        console.error("メッセージ送信に失敗しました: ", error);
-      });
-    });
-  })
-  .catch((error) => {
-    console.error("LIFF初期化エラー: ", error);
+// フォーム送信処理
+function sendMessageToAdmin() {
+  // フォームから選択された内容を取得する
+  const name = document.getElementById('name').value;
+  const month1 = document.getElementById('month1').value;
+  const day1 = document.getElementById('day1').value;
+  const time1 = document.getElementById('time1').value;
+  const menu = document.getElementById('menu').value;
+  const staff = document.getElementById('staff').value;
+
+  // 送信するメッセージ内容を作成
+  const message = `予約内容:\n名前: ${name}\n第1希望: ${month1}月${day1}日 ${time1}\nメニュー: ${menu}\nスタッフ: ${staff}`;
+
+  // メッセージをLINEに送信
+  liff.sendMessages([{
+    type: 'text',
+    text: message
+  }]).then(() => {
+    alert("予約内容が送信されました。");
+  }).catch((error) => {
+    console.error("メッセージ送信に失敗しました: ", error);
   });
+}
 
-    // 「送信ボタン」が押された時に送信を実行する（仮定）
-    document.getElementById('button').addEventListener('click', sendMessageToAdmin);
-}});
+// 送信ボタンにイベントリスナーを設定
+document.querySelector("button").addEventListener("click", function(event) {
+  event.preventDefault(); // フォームのデフォルト送信を防ぐ
+  sendMessageToAdmin();
+});
+
+}).catch((error) => {
+console.error("LIFF初期化エラー: ", error);
+});
 </script>
 
 </body>
