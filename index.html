@@ -13,23 +13,19 @@
       margin: 0;
       padding: 0;
     }
-  
     h1 {
       text-align: center;
       color: #FFF;
       margin-top: 20px;
       background-color: #4CAF50;
+      padding: 10px 0;
     }
-  
-    /* タイトルのスタイル */
     .title {
       font-size: 1.6em;
       color: #4CAF50;
       margin-bottom: 10px;
       text-align: center;
     }
-  
-    /* 日付入力フォームのスタイル */
     .date-container {
       display: flex;
       flex-direction: column;
@@ -39,21 +35,14 @@
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-  
-    /* 入力フィールドラッパー */
     .input-wrapper {
       margin-bottom: 15px;
     }
-  
-    /* 入力ラベルのスタイル */
     .input-label {
-      font-size: 1.6em;
-      color: #4CAF50;
-      margin-bottom: 10px;
-      text-align: center;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+      display: block;
     }
-  
-    /* 入力フィールド、セレクトボックス、テキストエリアのスタイル */
     .input-select,
     .input-field,
     .input-textarea {
@@ -65,8 +54,6 @@
       background-color: #f9f9f9;
       transition: border-color 0.3s ease;
     }
-  
-    /* フォーカス時のスタイル */
     .input-select:focus,
     .input-field:focus,
     .input-textarea:focus {
@@ -74,41 +61,21 @@
       border-color: #4CAF50;
       background-color: #fff;
     }
-  
-    /* セレクトボックス内のオプションのパディング */
-    .input-select option {
-      padding: 10px;
+    button {
+      padding: 12px;
+      font-size: 1em;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
     }
-  
-    /* テキストエリアの高さ調整 */
-    .input-textarea {
-      height: 100px;
-      resize: vertical;
+    button:hover {
+      background-color: #45a049;
     }
-  
-    /* 入力フィールドとセレクトボックスのフォーカス時のスタイル */
-    .input-wrapper select:focus,
-    .input-wrapper input:focus {
-      border-color: #388E3C;
-    }
-  
-    /* ボタンの基本スタイル */
-  button {
-    padding: 12px 24px; /* ボタンの内側の余白 */
-    font-size: 1em; /* フォントサイズ */
-    background-color: #4CAF50; /* 背景色 */
-    color: white; /* テキスト色 */
-    border: none; /* 枠線をなしに */
-    border-radius: 8px; /* 丸みのある角 */
-    cursor: pointer; /* ポインタに変化 */
-    width: 100%; /* ボタンを親要素いっぱいに広げる */
-
-  
-    /* レスポンシブ対応 */
-    @media (max-width: 600px) {
-      .date-container {
-        padding: 15px;
-      }
+    #other-input-container {
+      display: none;
     }
   </style>
   
@@ -131,7 +98,7 @@
   </div>
 
 <!-- 希望1 -->
-<h2 class="title">1KIBOU1</h2>
+<h2 class="title">第1希望</h2>
 <div class="date-container">
   <div class="input-wrapper">
     <label for="month1" class="input-label">月:</label>
@@ -199,12 +166,12 @@
 
   <div class="input-wrapper">
     <label for="day2" class="input-label">日:</label>
-    <select id="day2" name="day1" class="input-select" required></select>
+    <select id="day2" name="day" class="input-select" required></select>
   </div>
 
   <div class="input-wrapper">
     <label for="time2" class="input-label">時間:</label>
-    <select id="time2" name="time1" class="input-select" required>
+    <select id="time2" name="time2" class="input-select" required>
       <option value="9:00">9:00</option>
       <option value="10:00">10:00</option>
       <option value="11:00">11:00</option>
@@ -242,7 +209,7 @@
 
   <div class="input-wrapper">
     <label for="day3" class="input-label">日:</label>
-    <select id="day3" name="day1" class="input-select" required></select>
+    <select id="day3" name="day3" class="input-select" required></select>
   </div>
 
   <div class="input-wrapper">
@@ -268,8 +235,8 @@
  <div class="date-container">
    <div class="input-wrapper">
      <label for="menu" class="input-label">メニュー:</label>
-     <select id="menu" name="menu" class="input-select" required>
-       <option value="cut_esthetic">カット & エステ</option>
+     <select id="menu" class="input-select" onchange="toggleOtherInput()">
+       <option value="cut_esthetic">カットエステ</option>
        <option value="color_care">カラーケア</option>
        <option value="straight_care">ストレートケア</option>
        <option value="treatment_care">トリートメントケア</option>
@@ -280,11 +247,9 @@
  </div>
 
   <!-- "その他"メニュー -->
-  <div id="otherMenuWrapper" style="display:none;">
-    <div class="input-wrapper">
-      <label for="otherMenu" class="input-label">その他メニュー:</label>
-      <textarea id="otherMenu" name="otherMenu" class="input-textarea" placeholder="その他のメニューを入力してください"></textarea>
-    </div>
+  <div id="other-input-container" class="input-wrapper" style="display: none;">
+    <label for="other-menu" class="input-label">その他のメニュー</label>
+    <input type="text" id="other-menu" class="input-field" placeholder="具体的にご記入してください">
   </div>
 
   <!-- スタッフ -->
@@ -318,7 +283,7 @@
       <textarea id="comments" name="comments" class="input-field" rows="4" placeholder="ご要望があればご記入ください"></textarea>
     </div>
   </div>
-  <button type="submit">送信</button>
+  <button type="submit">予約希望を送信する</button>
 </form>
 
 <script>
@@ -368,50 +333,39 @@
     updateDays(monthSelectorId, daySelectors[index]);
   });
 
-   // メニューが「その他」選ばれた時に入力フィールドを表示
-   const menuSelect = document.getElementById('menu');
-    const otherMenuInput = document.getElementById('otherMenuInput');
-
-    menuSelect.addEventListener('change', function() {
-      if (menuSelect.value === 'その他') {
-        otherMenuInput.style.display = 'block'; // 表示
-      } else {
-        otherMenuInput.style.display = 'none'; // 非表示
-      }
-    });
-
-    // 初期状態では「その他」の入力フィールドは非表示
-    if (menuSelect.value !== 'その他') {
-      otherMenuInput.style.display = 'none';
+ // 「その他」選択時の表示制御
+ function toggleOtherInput() {
+      const menuSelect = document.getElementById("menu");
+      const otherInputContainer = document.getElementById("other-input-container");
+      otherInputContainer.style.display = menuSelect.value === "other" ? "block" : "none";
     }
 
+   // LIFF SDK初期化
+liff.init({ liffId: "your-lif2006595194-AkL3pQ0Df-id" }).then(() => {
+  // フォームから選択した内容を取得
+  const selectedMenu = document.getElementById('menu').value;
+  const selectedStaff = document.getElementById('staff').value;
 
-  document.getElementById("reservationForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+  // 送信ボタンがクリックされた時
+  document.getElementById('submit').addEventListener('click', () => {
+    // LINE管理者に送信するメッセージを作成
+    const message = `予約内容: メニュー - ${selectedMenu}, スタッフ - ${selectedStaff}`;
 
-    const formData = new FormData(event.target);
-    const reservationData = Object.fromEntries(formData.entries());
-
-    // サーバーに送信
-    fetch("https://your-backend-url.com/line-notify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(reservationData)
-    })
-    .then(response => {
-      if (response.ok) {
-        alert("予約内容が送信されました！");
-      } else {
-        alert("送信に失敗しました。");
-      }
-    })
-    .catch(error => {
-      console.error("エラー:", error);
-      alert("エラーが発生しました。");
+    // メッセージを送信
+    liff.sendMessages([{
+      type: 'text',
+      text: message
+    }]).then(() => {
+      alert("予約内容が送信されました。");
+    }).catch((error) => {
+      console.error("メッセージ送信に失敗しました: ", error);
     });
   });
+}).catch((error) => {
+  console.error("LIFF初期化エラー: ", error);
+});
+
+
 </script>
 </body>
 </html>
