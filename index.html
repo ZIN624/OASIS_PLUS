@@ -236,20 +236,20 @@
    <div class="input-wrapper">
      <label for="menu" class="input-label">メニュー:</label>
      <select id="menu" class="input-select" onchange="toggleOtherInput()">
-       <option value="cut_esthetic">カットエステ</option>
-       <option value="color_care">カラーケア</option>
-       <option value="straight_care">ストレートケア</option>
-       <option value="treatment_care">トリートメントケア</option>
-       <option value="perm_care">パーマケア</option>
-       <option value="other">その他</option>
+       <option value="カットエステ">カットエステ</option>
+       <option value="カラーケア">カラーケア</option>
+       <option value="ストレートケア">ストレートケア</option>
+       <option value="トリートメントケア">トリートメントケア</option>
+       <option value="パーマケア">パーマケア</option>
+       <option value="その他のメニュー">その他メニュー</option>
      </select>
    </div>
  </div>
 
   <!-- "その他"メニュー -->
   <div id="other-input-container" class="input-wrapper" style="display: none;">
-    <label for="other-menu" class="input-label">その他のメニュー</label>
-    <input type="text" id="other-menu" class="input-field" placeholder="具体的にご記入してください">
+    <label for="その他のメニュー" class="input-label">その他のメニュー</label>
+    <input type="text" id="その他のメニュー" class="input-field" placeholder="具体的にご記入してください">
   </div>
 
   <!-- スタッフ -->
@@ -258,9 +258,9 @@
     <div class="input-wrapper">
       <label for="staff" class="input-label">スタイリスト:</label>
       <select id="staff" name="staff" class="input-select" required>
-        <option value="no_preference">指定なし</option>
-        <option value="masato_okazaki">岡崎仁渡 (ディレクター)</option>
-        <option value="natsuki_okazaki">岡崎菜月(チーフ)</option>
+        <option value="指名なし">指定なし</option>
+        <option value="岡崎仁渡 (ディレクター)">岡崎仁渡 (ディレクター)</option>
+        <option value="岡崎菜月(チーフ)">岡崎菜月(チーフ)</option>
         
       </select>
     </div>
@@ -406,16 +406,16 @@ document.querySelector("button").addEventListener('click', function (event) {
 
       // メッセージ作成
       const message = `
-      予約希望内容:
-      名前: ${name}
-      第1希望: ${month1}月 ${day1}日 ${time1}時
-      第2希望: ${month2}月 ${day2}日 ${time2}時
-      第3希望: ${month3}月 ${day3}日 ${time3}時
-      メニュー: ${menu}
-      スタイリスト: ${staff}
-      備考欄：${comments}
-      確認でき次第ご返信いたしますのでお待ちください！！
-      `;
+予約希望内容:
+ご予約者名: ${name}
+第1希望: ${month1}月 ${day1}日 ${time1}時
+第2希望: ${month2}月 ${day2}日 ${time2}時
+第3希望: ${month3}月 ${day3}日 ${time3}時
+メニュー: ${menu}
+スタイリスト: ${staff}
+備考欄：${comments}
+確認でき次第ご返信いたしますのでお待ちください！！
+`;
 
       // メッセージを送信
       liff.sendMessages([{
