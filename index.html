@@ -283,9 +283,13 @@
       <textarea id="comments" name="comments" class="input-field" rows="4" placeholder="ご要望があればご記入ください"></textarea>
     </div>
   </div>
-  <button onclick="sendMessage()">予約希望を送信</button>
+
+  <!-- 送信ボタン -->
+  <button onclick="submit">予約希望を送信</button>
 
 </form>
+
+
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
 <script>
   // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
@@ -372,39 +376,63 @@
   // LIFF SDK初期化（1回のみ）
   liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
     // 送信ボタンがクリックされた時の処理
-    document.querySelector("button").addEventListener('click', function (event) {
-      event.preventDefault();  // デフォルトのフォーム送信を防止
+document.querySelector("button").addEventListener('click', function (event) {
+  event.preventDefault();  // デフォルトのフォーム送信を防止
 
       // フォームから選択された内容を取得
       const name = document.getElementById('name').value;
+
+      // 第1希望
       const month1 = document.getElementById('month1').value;
       const day1 = document.getElementById('day1').value;
       const time1 = document.getElementById('time1').value;
+
+      // 第2希望
+      const month2 = document.getElementById('month2').value;
+      const day2 = document.getElementById('day2').value;
+      const time2 = document.getElementById('time2').value;
+
+      // 第3希望
+      const month3 = document.getElementById('month3').value;
+      const day3 = document.getElementById('day3').value;
+      const time3 = document.getElementById('time3').value;
+
+      // メニューとスタイリスト
       const menu = document.getElementById('menu').value;
       const staff = document.getElementById('staff').value;
 
-      // メッセージ作成
-      const message = `予約内容:\n名前: ${name}\n第1希望: ${month1}月 ${day1}日 ${time1}時\nメニュー: ${menu}\nスタイリスト: ${staff}`;
+      // 備考（オプション）
+      const comments = document.getElementById('comments').value;
 
-      // 送信メッセージの作成
-      function sendMessage() {
+      // メッセージ作成
+      const message = `
+      予約希望内容:
+      名前: ${name}
+      第1希望: ${month1}月 ${day1}日 ${time1}時
+      第2希望: ${month2}月 ${day2}日 ${time2}時
+      第3希望: ${month3}月 ${day3}日 ${time3}時
+      メニュー: ${menu}
+      スタイリスト: ${staff}
+      備考欄：${comments}
+      確認でき次第ご返信いたしますのでお待ちください！！
+      `;
+
+      // メッセージを送信
       liff.sendMessages([{
         type: 'text',
         text: message
       }]).then(() => {
         alert("予約内容が送信されました。");
-      
-        // 送信後、LIFFウィンドウを閉じる
         liff.closeWindow();
       }).catch((error) => {
         console.error("メッセージ送信に失敗しました: ", error);
       });
-    }
     });
   }).catch((error) => {
     console.error("LIFF初期化エラー: ", error);
   });
 </script>
+
 
 
 </body>
