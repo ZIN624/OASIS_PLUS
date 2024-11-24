@@ -30,7 +30,7 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 20px;
-      padding: 20px;
+      padding-bottom: 20px;
       background-color: #fff;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -290,31 +290,31 @@
 <script>
   // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
   function populateDays() {
-            const select = document.getElementById('day1');
-            const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    const select = document.getElementById('day1');
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
 
-            const today = new Date(); // 今日の日付
-            const currentYear = today.getFullYear(); // 現在の年
-            const currentMonth = today.getMonth(); // 現在の月
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // 現在の月の日数
+    const today = new Date(); 
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 
 
-            // 1日からその月の最終日までを表示
-            for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(currentYear, currentMonth, day); // 現在の月のその日
-                const weekday = weekdays[date.getDay()];  // 曜日を取得
+    // 1日からその月の最終日までを表示
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(currentYear, currentMonth, day); 
+      const weekday = weekdays[date.getDay()];
 
-                // optionタグを作成
-                const option = document.createElement('option');
-                option.value = `${currentYear}-${currentMonth + 1}-${day}`; // yyyy-mm-dd形式
-                option.textContent = `${day} (${weekday})`; // 日付と曜日を表示
+      // optionタグを作成
+      const option = document.createElement('option');
+      option.value = `${currentYear}-${currentMonth + 1}-${day}`; 
+      option.textContent = `${day} (${weekday})`; 
 
-                // セレクトボックスに追加
-                select.appendChild(option);
-            }
-        }
+      // セレクトボックスに追加
+      select.appendChild(option);
+    }
+  }
 
-        // ページロード時にpopulateDaysを実行
-        window.onload = populateDays;
+  // ページロード時にpopulateDaysを実行
+  window.onload = populateDays;
 
   // 月と日の選択肢を制御する関数
   function updateDays(monthSelectId, daySelectId) {
@@ -328,16 +328,16 @@
     let maxDays;
     switch (month) {
       case '2':
-        maxDays = 28; // 2月（非うるう年）
+        maxDays = 28; 
         break;
       case '4':
       case '6':
       case '9':
       case '11':
-        maxDays = 30; // 30日までの月
+        maxDays = 30; 
         break;
       default:
-        maxDays = 31; // 31日までの月
+        maxDays = 31; 
     }
 
     // 日数の選択肢を作成
@@ -362,15 +362,15 @@
     updateDays(monthSelectorId, daySelectors[index]);
   });
 
- // 「その他」選択時の表示制御
- function toggleOtherInput() {
-      const menuSelect = document.getElementById("menu");
-      const otherInputContainer = document.getElementById("other-input-container");
-      otherInputContainer.style.display = menuSelect.value === "other" ? "block" : "none";
-    }
+  // 「その他」選択時の表示制御
+  function toggleOtherInput() {
+    const menuSelect = document.getElementById("menu");
+    const otherInputContainer = document.getElementById("other-input-container");
+    otherInputContainer.style.display = menuSelect.value === "other" ? "block" : "none";
+  }
 
-    // LIFF SDK初期化（1回のみ）
-    liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
+  // LIFF SDK初期化（1回のみ）
+  liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
     // 送信ボタンがクリックされた時の処理
     document.querySelector("button").addEventListener('click', function (event) {
       event.preventDefault();  // デフォルトのフォーム送信を防止
@@ -403,6 +403,7 @@
     console.error("LIFF初期化エラー: ", error);
   });
 </script>
+
 
 </body>
 </html>
