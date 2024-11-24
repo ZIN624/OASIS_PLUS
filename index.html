@@ -36,7 +36,7 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .input-wrapper {
-      margin-bottom: 15px;
+      margin: 10px;
     }
     .input-label {
       font-size: 1.2em;
@@ -288,6 +288,34 @@
 </form>
 
 <script>
+  // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
+  function populateDays() {
+            const select = document.getElementById('day1');
+            const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+
+            const today = new Date(); // 今日の日付
+            const currentYear = today.getFullYear(); // 現在の年
+            const currentMonth = today.getMonth(); // 現在の月
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // 現在の月の日数
+
+            // 1日からその月の最終日までを表示
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYear, currentMonth, day); // 現在の月のその日
+                const weekday = weekdays[date.getDay()];  // 曜日を取得
+
+                // optionタグを作成
+                const option = document.createElement('option');
+                option.value = `${currentYear}-${currentMonth + 1}-${day}`; // yyyy-mm-dd形式
+                option.textContent = `${day} (${weekday})`; // 日付と曜日を表示
+
+                // セレクトボックスに追加
+                select.appendChild(option);
+            }
+        }
+
+        // ページロード時にpopulateDaysを実行
+        window.onload = populateDays;
+
   // 月と日の選択肢を制御する関数
   function updateDays(monthSelectId, daySelectId) {
     const month = document.getElementById(monthSelectId).value;
@@ -343,38 +371,44 @@
 
    // LIFF SDK初期化
 liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
-// フォーム送信処理（例）
-function sendMessageToAdmin() {
-    // フォームから選択された内容を取得する（例）
-    const name = document.getElementById('name').value;
-    const date = document.getElementById('date').value;
-    const time = document.getElementById('time').value;
-    const menu = document.getElementById('menu').value;
-    const staff = document.getElementById('staff').value;
+    // フォーム送信処理（例）
+    function sendMessageToAdmin() {
+        // フォームから選択された内容を取得する（例）
+        const name = document.getElementById('name').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const menu = document.getElementById('menu').value;
+        const staff = document.getElementById('staff').value;
 
-    // 管理者に送信するメッセージを作成
-    const message = `予約内容:\n名前: ${name}\n日付: ${date}\n時間: ${time}\nメニュー: ${menu}\nスタッフ: ${staff}`;
+        // 管理者に送信するメッセージを作成
+        const message = `予約内容:\n名前: ${name}\n日付: ${date}\n時間: ${time}\nメニュー: ${menu}\nスタッフ: ${staff}`;
 
-    // LINE Messaging APIを使用してメッセージを送信（ここではLINE APIのリクエスト処理）
-    fetch("https://your-backend-url.com/line-notify", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: message })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('送信成功:', data);
-        // 送信が成功したらLIFFウィンドウを閉じてトーク画面に戻る
-        liff.closeWindow();
-    })
-    .catch(error => {
-        console.error('送信エラー:', error);
-        // 送信に失敗した場合のエラーハンドリング
+        // LIFF SDKの初期化
+liff.init({ liffId: "2006595194-AkL3pQ0D" })
+  .then(() => {
+    // フォームの選択内容を取得
+    const selectedMenu = document.getElementById('menu').value;
+
+    // 送信ボタンがクリックされた時
+    document.getElementById('submit').addEventListener('click', () => {
+      liff.sendMessages([{
+        type: 'text',
+        text: `予約内容: ${selectedMenu}が選択されました。`
+      }]).then(() => {
+        alert("予約内容が送信されました。");
+      }).catch((error) => {
+        console.error("メッセージ送信に失敗しました: ", error);
+      });
     });
-}
+  })
+  .catch((error) => {
+    console.error("LIFF初期化エラー: ", error);
+  });
 
+    // 「送信ボタン」が押された時に送信を実行する（仮定）
+    document.getElementById('button').addEventListener('click', sendMessageToAdmin);
+}});
 </script>
+
 </body>
 </html>
