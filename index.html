@@ -405,8 +405,8 @@ document.querySelector("button").addEventListener('click', function (event) {
       const comments = document.getElementById('comments').value;
 
       // メッセージ作成
-      const message = `
-予約希望内容:
+      const message = 
+`予約希望内容:
 ご予約者名: ${name}
 第1希望: ${month1}月 ${day1}日 ${time1}時
 第2希望: ${month2}月 ${day2}日 ${time2}時
@@ -414,8 +414,7 @@ document.querySelector("button").addEventListener('click', function (event) {
 メニュー: ${menu}
 スタイリスト: ${staff}
 備考欄：${comments}
-確認でき次第ご返信いたしますのでお待ちください！！
-`;
+確認でき次第ご返信いたしますのでお待ちください！！`;
 
       // メッセージを送信
       liff.sendMessages([{
