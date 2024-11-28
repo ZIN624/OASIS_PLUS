@@ -485,12 +485,15 @@ const reservation = {
 let message = `予約者名: ${reservation.name}\n`;
 
 // 第1希望〜第3希望を表示
+// 予約情報の表示を修正
 if (reservation.preferences.length > 0) {
   reservation.preferences.forEach((pref, index) => {
     if (pref.month && pref.day && pref.time) {
+      // ${pref.month}月${pref.day}日 ${pref.time}時 の形式
       message += `第${index + 1}希望: ${pref.month}月${pref.day}日 ${pref.time}時\n`;
     }
   });
+}
 } else {
   message += '第2希望はありません。\n';  // 第2希望がない場合のメッセージ
 }
