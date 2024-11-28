@@ -262,9 +262,8 @@
       <label for="staff" class="input-label">スタイリスト:</label>
       <select id="staff" name="staff" class="input-select" required>
         <option value="指名なし">指定なし</option>
-        <option value="岡崎仁渡 【ディレクター】">岡崎仁渡 (ディレクター)</option>
-        <option value="岡崎菜月【チーフ】">岡崎菜月(チーフ)</option>
-        
+        <option value="岡崎仁渡 【ディレクター】">岡崎仁渡 【ディレクター】</option>
+        <option value="岡崎菜月【チーフ】">岡崎菜月(チーフ)【チーフ】
       </select>
     </div>
   </div>
@@ -274,12 +273,7 @@
    <div class="date-container">
      <div class="input-wrapper">
        <label for="phone" class="input-label">電話番号:</label>
-       <input 
-  type="text" 
-  id="phoneNumber"
-  class="input-field" 
-  placeholder="例: 090-1234-5678 または 09012345678" 
-  required>
+       <input type="text" id="phoneNumber" class="input-field" placeholder="例: 090-1234-5678 または 09012345678"  required>
      </div>
    </div>
 
@@ -434,6 +428,7 @@ document.querySelector("button").addEventListener('click', function (event) {
       // メニューとスタイリスト
       const menu = document.getElementById('menu').value;
       const staff = document.getElementById('staff').value;
+const phone = document.getElementById('phoneNumber').value; // 電話番号を取得
 
 // メニュー表示（「その他」が選ばれた場合は入力内容を使用）
   const selectedMenu = menu === "その他メニュー" ? `その他（${otherMenu}）` : menu;
@@ -449,7 +444,7 @@ document.querySelector("button").addEventListener('click', function (event) {
 第3希望: ${month3}月 ${day3}日 ${time3}時
 メニュー: ${menu}
 スタイリスト: ${staff}
-電話番号: ${phone}
+電話番号: ${phonphoneNumbere}
 備考欄：${comments}
 確認でき次第ご返信いたしますのでお待ちください！！`;
 
