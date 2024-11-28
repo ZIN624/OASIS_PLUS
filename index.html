@@ -431,7 +431,7 @@ document.querySelector("button").addEventListener('click', function (event) {
 const phone = document.getElementById('phoneNumber').value; // 電話番号を取得
 
 // メニュー表示（「その他」が選ばれた場合は入力内容を使用）
-  const selectedMenu = menu === "その他メニュー" ? `その他（${otherMenu}）` : menu;
+  const selectedMenu = menu === "その他メニュー" ? `その他（${その他のメニュー}）` : menu;
       // 備考（オプション）
       const comments = document.getElementById('comments').value;
 
@@ -444,7 +444,7 @@ const phone = document.getElementById('phoneNumber').value; // 電話番号を�
 第3希望: ${month3}月 ${day3}日 ${time3}時
 メニュー: ${menu}
 スタイリスト: ${staff}
-電話番号: ${phonphoneNumbere}
+電話番号: ${phoneNumber}
 備考欄：${comments}
 確認でき次第ご返信いたしますのでお待ちください！！`;
 
