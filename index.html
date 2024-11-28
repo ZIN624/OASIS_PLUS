@@ -451,17 +451,36 @@ const reservation = {
   menu: document.getElementById('menu').value,
   otherMenu: document.getElementById('その他のメニュー').value,
   staff: document.getElementById('staff').value,
-  phone: phone,
+  phone: phoneNumber,
   comments: document.getElementById('comments').value
 };
 
  // 送信メッセージの構築
 let message = `予約者名: ${reservation.name}\n`;
-reservation.preferences.forEach((pref, index) => {
-  message += `第${index + 1}希望: ${pref.month}月${pref.day}日 ${pref.time}時\n`;
-});
-message += `メニュー: ${reservation.menu}${reservation.menu === 'その他メニュー' ? ` (${reservation.otherMenu})` : ''}\n`;
+
+// 第1希望〜第3希望を表示
+if (reservation.preferences.length > 0) {
+  reservation.preferences.forEach((pref, index) => {
+    if (pref.month && pref.day && pref.time) {
+      message += `第${index + 1}希望: ${pref.month}月${pref.day}日 ${pref.time}時\n`;
+    }
+  });
+} else {
+  message += '第2希望はありません。\n';  // 第2希望がない場合のメッセージ
+}
+
+// メニューの表示
+message += `メニュー: ${reservation.menu}`;
+if (reservation.menu === 'その他メニュー' && reservation.otherMenu) {
+  message += ` (${reservation.otherMenu})`;
+}
+message += `\n`;
+
+// スタイリスト、電話番号、コメントの表示
 message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${reservation.phone}\nコメント: ${reservation.comments}`;
+
+console.log(message);  // メッセージ内容をコンソールに出力して確認
+
 
   // LINEメッセージ送信
   liff.sendMessages([{
