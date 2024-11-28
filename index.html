@@ -143,6 +143,7 @@
     <!-- 希望2 / 希望3の追加ボタン -->
     <button type="button" id="addSecondChoice">第2希望を追加</button>
     <div id="secondChoice"></div>
+    
 
     <button type="button" id="addThirdChoice">第3希望を追加</button>
     <div id="thirdChoice"></div>
@@ -260,112 +261,131 @@
     }
   }
 
-  // 第2希望を追加
-  document.getElementById('addSecondChoice').addEventListener('click', function() {
-      const secondChoiceDiv = document.getElementById('secondChoice');
-      secondChoiceDiv.innerHTML = `
-        <h2 class="title">第2希望</h2>
-        <div class="input-wrapper">
-          <label for="month2" class="input-label">月:</label>
-          <select id="month2" name="month2" class="input-select" onchange="updateDays('month2', 'day2')" required>
-            <!-- 月の選択肢 -->
-            <option value="1">1月</option>
-            <option value="2">2月</option>
-            <option value="3">3月</option>
-            <option value="4">4月</option>
-            <option value="5">5月</option>
-            <option value="6">6月</option>
-            <option value="7">7月</option>
-            <option value="8">8月</option>
-            <option value="9">9月</option>
-            <option value="10">10月</option>
-            <option value="11">11月</option>
-            <option value="12">12月</option>
-          </select>
-        </div>
-        <div class="input-wrapper">
-          <label for="day2" class="input-label">日:</label>
-          <select id="day2" name="day2" class="input-select" required></select>
-        </div>
-        <div class="input-wrapper">
-          <label for="time2" class="input-label">時間:</label>
-          <select id="time2" name="time2" class="input-select" required>
-            <!-- 時間の選択肢 -->
-            <option value="9:00">9:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-          </select>
-        </div>
-      `;
-      updateDays('month2', 'day2');
-    });
+// 第2希望を追加
+document.getElementById('addSecondChoice').addEventListener('click', function() {
+    const secondChoiceDiv = document.getElementById('secondChoice');
+    
+    // もし第2希望フォームがまだ表示されていなければ、追加
+    if (!secondChoiceDiv.innerHTML) {
+        secondChoiceDiv.innerHTML = `
+            <h2 class="title">第2希望</h2>
+            <div class="input-wrapper">
+              <label for="month2" class="input-label">月:</label>
+              <select id="month2" name="month2" class="input-select" onchange="updateDays('month2', 'day2')" required>
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+              </select>
+            </div>
+            <div class="input-wrapper">
+              <label for="day2" class="input-label">日:</label>
+              <select id="day2" name="day2" class="input-select" required></select>
+            </div>
+            <div class="input-wrapper">
+              <label for="time2" class="input-label">時間:</label>
+              <select id="time2" name="time2" class="input-select" required>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+              </select>
+            </div>
+        `;
+        updateDays('month2', 'day2');
+    } else {
+        // すでにフォームが表示されていれば非表示にする
+        secondChoiceDiv.innerHTML = '';
+    }
+});
 
-    // 第3希望を追加
-    document.getElementById('addThirdChoice').addEventListener('click', function() {
-      const thirdChoiceDiv = document.getElementById('thirdChoice');
-      thirdChoiceDiv.innerHTML = `
-        <h2 class="title">第3希望</h2>
-        <div class="input-wrapper">
-          <label for="month3" class="input-label">月:</label>
-          <select id="month3" name="month3" class="input-select" onchange="updateDays('month3', 'day3')" required>
-            <!-- 月の選択肢 -->
-            <option value="1">1月</option>
-            <option value="2">2月</option>
-            <option value="3">3月</option>
-            <option value="4">4月</option>
-            <option value="5">5月</option>
-            <option value="6">6月</option>
-            <option value="7">7月</option>
-            <option value="8">8月</option>
-            <option value="9">9月</option>
-            <option value="10">10月</option>
-            <option value="11">11月</option>
-            <option value="12">12月</option>
-          </select>
-        </div>
-        <div class="input-wrapper">
-          <label for="day3" class="input-label">日:</label>
-          <select id="day3" name="day3" class="input-select" required></select>
-        </div>
-        <div class="input-wrapper">
-          <label for="time3" class="input-label">時間:</label>
-          <select id="time3" name="time3" class="input-select" required>
-            <!-- 時間の選択肢 -->
-            <option value="9:00">9:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-          </select>
-        </div>
-      `;
-      updateDays('month3', 'day3');
-    });
+// 第3希望を追加
+document.getElementById('addThirdChoice').addEventListener('click', function() {
+    const thirdChoiceDiv = document.getElementById('thirdChoice');
+    
+    // もし第3希望フォームがまだ表示されていなければ、追加
+    if (!thirdChoiceDiv.innerHTML) {
+        thirdChoiceDiv.innerHTML = `
+            <h2 class="title">第3希望</h2>
+            <div class="input-wrapper">
+              <label for="month3" class="input-label">月:</label>
+              <select id="month3" name="month3" class="input-select" onchange="updateDays('month3', 'day3')" required>
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+              </select>
+            </div>
+            <div class="input-wrapper">
+              <label for="day3" class="input-label">日:</label>
+              <select id="day3" name="day3" class="input-select" required></select>
+            </div>
+            <div class="input-wrapper">
+              <label for="time3" class="input-label">時間:</label>
+              <select id="time3" name="time3" class="input-select" required>
+                <option value="9:00">9:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+              </select>
+            </div>
+        `;
+        updateDays('month3', 'day3');
+    } else {
+        // すでにフォームが表示されていれば非表示にする
+        thirdChoiceDiv.innerHTML = '';
+    }
+});
+
+// 月が選択されたときに日付を更新する関数
+function updateDays(monthId, dayId) {
+    const month = document.getElementById(monthId).value;
+    const daysSelect = document.getElementById(dayId);
+
+    // ここで選択された月に基づいて、日付を動的に追加
+    const daysInMonth = new Date(2024, month, 0).getDate(); // 2024年の月の日数を取得
+
+    let daysOptions = '';
+    for (let i = 1; i <= daysInMonth; i++) {
+        daysOptions += `<option value="${i}">${i}日</option>`;
+    }
+
+    daysSelect.innerHTML = daysOptions;
+}
+
 
   // 月が変更された時に日付の選択肢を更新
   const monthSelectors = ['month1', 'month2', 'month3'];
   const daySelectors = ['day1', 'day2', 'day3'];
 
-  monthSelectors.forEach((monthSelectorId, index) => {
-    document.getElementById(monthSelectorId).addEventListener("change", function() {
-      updateDays(monthSelectorId, daySelectors[index]);
-    });
-
-    // 初期化
-    updateDays(monthSelectorId, daySelectors[index]);
-  });
 
 // その他のメニュー入力の表示・非表示を切り替える関数
 function toggleOtherInput() {
@@ -388,23 +408,21 @@ document.getElementById('phoneNumber').addEventListener('input', function (e) {
   }
 });
 
-// ページ読み込み時に保存された電話番号を自動入力
-document.addEventListener('DOMContentLoaded', function () {
-  const savedPhone = localStorage.getItem('phoneNumber');
-  if (savedPhone) {
-    document.getElementById('phoneNumber').value = savedPhone;  
-  }
-});
+ // 名前と電話番号の自動入力
+ const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phoneNumber");
 
-// 入力された電話番号を保存
-document.getElementById('phoneNumber').addEventListener('blur', function (e) {
-  const phoneInput = e.target.value;
-  const isValid = /^(\d{2,4}-?\d{2,4}-?\d{4})$/.test(phoneInput); // バリデーション再確認
-  if (isValid) {
-    localStorage.setItem('phoneNumber', phoneInput);
-  }
-});
+  // 名前と電話番号の記憶
+  nameInput.value = localStorage.getItem("name") || '';
+  phoneInput.value = localStorage.getItem("phoneNumber") || '';
 
+  // 名前と電話番号を保存
+  nameInput.addEventListener('input', function() {
+    localStorage.setItem("name", nameInput.value);
+  });
+  phoneInput.addEventListener('input', function() {
+    localStorage.setItem("phoneNumber", phoneInput.value);
+  });
  // 送信ボタンがクリックされた時の処理
 document.querySelector("button").addEventListener('click', function (event) {
   event.preventDefault();  // デフォルトのフォーム送信を防止
@@ -422,28 +440,28 @@ document.querySelector("button").addEventListener('click', function (event) {
     return;
   }
 
-  // 予約情報をオブジェクトにまとめる
-  const reservation = {
-    name: name,
-    preferences: [
-      { month: document.getElementById('month1').value, day: document.getElementById('day1').value, time: document.getElementById('time1').value },
-      { month: document.getElementById('month2').value, day: document.getElementById('day2').value, time: document.getElementById('time2').value },
-      { month: document.getElementById('month3').value, day: document.getElementById('day3').value, time: document.getElementById('time3').value }
-    ],
-    menu: document.getElementById('menu').value,
-    otherMenu: document.getElementById('その他のメニュー').value,
-    staff: document.getElementById('staff').value,
-    phone: phone,
-    comments: document.getElementById('comments').value
-  };
+// 予約情報をオブジェクトにまとめる
+const reservation = {
+  name: name,
+  preferences: [
+    { month: document.getElementById('month1').value, day: document.getElementById('day1').value, time: document.getElementById('time1').value },
+    { month: document.getElementById('month2').value, day: document.getElementById('day2').value, time: document.getElementById('time2').value },
+    { month: document.getElementById('month3').value, day: document.getElementById('day3').value, time: document.getElementById('time3').value }
+  ].filter(pref => pref.month && pref.day && pref.time),  // 月、日、時間がすべて選択されている希望だけを保持
+  menu: document.getElementById('menu').value,
+  otherMenu: document.getElementById('その他のメニュー').value,
+  staff: document.getElementById('staff').value,
+  phone: phone,
+  comments: document.getElementById('comments').value
+};
 
-  // 送信メッセージの構築
-  let message = `予約者名: ${reservation.name}\n`;
-  reservation.preferences.forEach((pref, index) => {
-    message += `第${index + 1}希望: ${pref.month}月${pref.day}日 ${pref.time}時\n`;
-  });
-  message += `メニュー: ${reservation.menu}${reservation.menu === 'その他メニュー' ? ` (${reservation.otherMenu})` : ''}\n`;
-  message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${reservation.phone}\nコメント: ${reservation.comments}`;
+ // 送信メッセージの構築
+let message = `予約者名: ${reservation.name}\n`;
+reservation.preferences.forEach((pref, index) => {
+  message += `第${index + 1}希望: ${pref.month}月${pref.day}日 ${pref.time}時\n`;
+});
+message += `メニュー: ${reservation.menu}${reservation.menu === 'その他メニュー' ? ` (${reservation.otherMenu})` : ''}\n`;
+message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${reservation.phone}\nコメント: ${reservation.comments}`;
 
   // LINEメッセージ送信
   liff.sendMessages([{
