@@ -262,8 +262,8 @@
       <label for="staff" class="input-label">スタイリスト:</label>
       <select id="staff" name="staff" class="input-select" required>
         <option value="指名なし">指定なし</option>
-        <option value="岡崎仁渡 (ディレクター)">岡崎仁渡 (ディレクター)</option>
-        <option value="岡崎菜月(チーフ)">岡崎菜月(チーフ)</option>
+        <option value="岡崎仁渡 【ディレクター】">岡崎仁渡 (ディレクター)</option>
+        <option value="岡崎菜月【チーフ】">岡崎菜月(チーフ)</option>
         
       </select>
     </div>
@@ -274,7 +274,12 @@
    <div class="date-container">
      <div class="input-wrapper">
        <label for="phone" class="input-label">電話番号:</label>
-       <input type="tel" id="phone" name="phone" placeholder="電話番号" class="input-field" required>
+       <input 
+  type="text" 
+  id="phoneNumber"
+  class="input-field" 
+  placeholder="例: 090-1234-5678 または 09012345678" 
+  required>
      </div>
    </div>
 
@@ -375,7 +380,32 @@ function toggleOtherInput() {
   const otherInputContainer = document.getElementById("other-input-container");
   otherInputContainer.style.display = menuSelect.value === "その他メニュー" ? "block" : "none";
 }
+document.getElementById('phoneNumber').addEventListener('input', function (e) {
+  const phoneInput = e.target.value;
+  const isValid = /^(\d{2,4}-?\d{2,4}-?\d{4})$/.test(phoneInput); // ハイフンあり・なし対応
+  if (!isValid) {
+    e.target.setCustomValidity('電話番号は正しい形式で入力してください（例: 090-1234-5678 または 09012345678）');
+  } else {
+    e.target.setCustomValidity('');
+  }
+});
 
+// ページ読み込み時に保存された電話番号を自動入力
+document.addEventListener('DOMContentLoaded', function () {
+  const savedPhone = localStorage.getItem('phoneNumber');
+  if (savedPhone) {
+    document.getElementById('phoneNumber').value = savedPhone;
+  }
+});
+
+// 入力された電話番号を保存
+document.getElementById('phoneNumber').addEventListener('blur', function (e) {
+  const phoneInput = e.target.value;
+  const isValid = /^(\d{2,4}-?\d{2,4}-?\d{4})$/.test(phoneInput); // バリデーション再確認
+  if (isValid) {
+    localStorage.setItem('phoneNumber', phoneInput);
+  }
+});
 
   // LIFF SDK初期化（1回のみ）
   liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
@@ -406,7 +436,7 @@ document.querySelector("button").addEventListener('click', function (event) {
       const staff = document.getElementById('staff').value;
 
 // メニュー表示（「その他」が選ばれた場合は入力内容を使用）
-  const selectedMenu = menu === "other" ? `その他（${otherMenu}）` : menu;
+  const selectedMenu = menu === "その他メニュー" ? `その他（${otherMenu}）` : menu;
       // 備考（オプション）
       const comments = document.getElementById('comments').value;
 
@@ -419,6 +449,7 @@ document.querySelector("button").addEventListener('click', function (event) {
 第3希望: ${month3}月 ${day3}日 ${time3}時
 メニュー: ${menu}
 スタイリスト: ${staff}
+電話番号: ${phone}
 備考欄：${comments}
 確認でき次第ご返信いたしますのでお待ちください！！`;
 
