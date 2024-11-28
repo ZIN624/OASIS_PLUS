@@ -231,26 +231,27 @@
 
 
  <!-- メニュー -->
- <h2 class="title">メニュー選択:</h2>
- <div class="date-container">
-   <div class="input-wrapper">
-     <label for="menu" class="input-label">メニュー:</label>
-     <select id="menu" class="input-select" onchange="toggleOtherInput()">
-       <option value="カットエステ">カットエステ</option>
-       <option value="カラーケア">カラーケア</option>
-       <option value="ストレートケア">ストレートケア</option>
-       <option value="トリートメントケア">トリートメントケア</option>
-       <option value="パーマケア">パーマケア</option>
-       <option value="その他のメニュー">その他メニュー</option>
-     </select>
-   </div>
- </div>
-
-  <!-- "その他"メニュー -->
-  <div id="other-input-container" class="input-wrapper" style="display: none;">
-    <label for="その他のメニュー" class="input-label">その他のメニュー</label>
-    <input type="text" id="その他のメニュー" class="input-field" placeholder="具体的にご記入してください">
+<!-- メニュー -->
+<h2 class="title">メニュー選択:</h2>
+<div class="date-container">
+  <div class="input-wrapper">
+    <label for="menu" class="input-label">メニュー:</label>
+    <select id="menu" class="input-select" onchange="toggleOtherInput()">
+      <option value="カットエステ">カットエステ</option>
+      <option value="カラーケア">カラーケア</option>
+      <option value="ストレートケア">ストレートケア</option>
+      <option value="トリートメントケア">トリートメントケア</option>
+      <option value="パーマケア">パーマケア</option>
+      <option value="その他メニュー">その他メニュー</option>
+    </select>
   </div>
+</div>
+
+<!-- "その他"メニュー -->
+<div id="other-input-container" class="input-wrapper" style="display: none;">
+  <label for="その他のメニュー" class="input-label">その他のメニュー</label>
+  <input type="text" id="その他のメニュー" class="input-field" placeholder="具体的にご記入してください">
+</div>
 
   <!-- スタッフ -->
   <h2 class="title">担当スタイリスト:</h2>
@@ -366,12 +367,13 @@
     updateDays(monthSelectorId, daySelectors[index]);
   });
 
-  // 「その他」選択時の表示制御
-  function toggleOtherInput() {
-    const menuSelect = document.getElementById("menu");
-    const otherInputContainer = document.getElementById("other-input-container");
-    otherInputContainer.style.display = menuSelect.value === "other" ? "block" : "none";
-  }
+// 「その他」選択時の表示制御
+function toggleOtherInput() {
+  const menuSelect = document.getElementById("menu");
+  const otherInputContainer = document.getElementById("other-input-container");
+  otherInputContainer.style.display = menuSelect.value === "その他メニュー" ? "block" : "none";
+}
+
 
   // LIFF SDK初期化（1回のみ）
   liff.init({ liffId: "2006595194-AkL3pQ0D" }).then(() => {
