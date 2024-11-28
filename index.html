@@ -518,10 +518,18 @@ console.log(message);  // メッセージ内容をコンソールに出力して
     type: 'text',
     text: message
   }]).then(function () {
-    alert('予約内容が送信されました。');
+    alert('ご予約希望ありがとうございます！
+      確認致しますので暫くお待ちください😊');
   }).catch(function (error) {
     alert('エラーが発生しました: ' + error.message || error);
   });
+    // 3秒（3000ミリ秒）後に閉じる
+  setTimeout(() => {
+    liff.closeWindow();
+  }, 3000);
+}).catch(function (error) {
+  alert('エラーが発生しました: ' + error.message || error);
+});
 });
 
 
