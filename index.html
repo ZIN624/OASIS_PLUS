@@ -84,7 +84,7 @@
 
 <body>
   
-
+  <script src="https://static.line-scdn.net/liff/2.1/sdk.js"></script>
   <h1>OASIS予約フォーム</h1>
 
   <form id="reservationForm">
@@ -199,10 +199,18 @@
     <button type="submit"id="someButton">予約希望を送信</button>
   </form>
 
-  <script src="https://static.line-scdn.net/liff/2.1/sdk.js"></script>
+ 
 
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
 <script>
+  liff.init({
+  liffId: '2006595194-AkL3pQ0D' // LINE Developersから取得したLIFF ID
+}).then(() => {
+  console.log('LIFF initialized');
+}).catch((error) => {
+  console.error('LIFF initialization failed:', error);
+});
+
   // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
   function populateDays() {
     const select = document.getElementById('day1');
@@ -498,13 +506,6 @@ message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${rese
 
 console.log(message);  // メッセージ内容をコンソールに出力して確認
 
-liff.init({
-  liffId: '2006595194-AkL3pQ0D' // LINE Developersから取得したLIFF ID
-}).then(() => {
-  console.log('LIFF initialized');
-}).catch((error) => {
-  console.error('LIFF initialization failed:', error);
-});
 
 
   // LINEメッセージ送信
