@@ -145,6 +145,8 @@
     <div id="secondChoice"></div>
     
 
+    
+
     <button type="button" id="addThirdChoice">第3希望を追加</button>
     <div id="thirdChoice"></div>
 
@@ -194,7 +196,7 @@
     </div>
 
     <!-- 送信ボタン -->
-    <button type="submit">予約希望を送信</button>
+    <button type="submit"id="someButton">予約希望を送信</button>
   </form>
 
 
@@ -424,7 +426,8 @@ document.getElementById('phoneNumber').addEventListener('input', function (e) {
     localStorage.setItem("phoneNumber", phoneInput.value);
   });
  // 送信ボタンがクリックされた時の処理
-document.querySelector("button").addEventListener('click', function (event) {
+ document.getElementById("someButton").addEventListener("click", function () {
+  console.log("Button clicked");
   event.preventDefault();  // デフォルトのフォーム送信を防止
 
   // フォームのバリデーションチェック
@@ -442,17 +445,29 @@ document.querySelector("button").addEventListener('click', function (event) {
 
 // 予約情報をオブジェクトにまとめる
 const reservation = {
-  name: name,
+  name: document.getElementById('name')?.value || '',
   preferences: [
-    { month: document.getElementById('month1').value, day: document.getElementById('day1').value, time: document.getElementById('time1').value },
-    { month: document.getElementById('month2').value, day: document.getElementById('day2').value, time: document.getElementById('time2').value },
-    { month: document.getElementById('month3').value, day: document.getElementById('day3').value, time: document.getElementById('time3').value }
-  ].filter(pref => pref.month && pref.day && pref.time),  // 月、日、時間がすべて選択されている希望だけを保持
+    {
+      month: document.getElementById('month1')?.value || '',
+      day: document.getElementById('day1')?.value || '',
+      time: document.getElementById('time1')?.value || ''
+    },
+    {
+      month: document.getElementById('month2')?.value || '',
+      day: document.getElementById('day2')?.value || '',
+      time: document.getElementById('time2')?.value || ''
+    },
+    {
+      month: document.getElementById('month3')?.value || '',
+      day: document.getElementById('day3')?.value || '',
+      time: document.getElementById('time3')?.value || ''
+    }
+  ].filter(pref => pref.month && pref.day && pref.time), // 必須項目が揃っている場合のみフィルタ
   menu: document.getElementById('menu').value,
-  otherMenu: document.getElementById('その他のメニュー').value,
-  staff: document.getElementById('staff').value,
-  phone: phoneNumber,
-  comments: document.getElementById('comments').value
+  otherMenu: document.getElementById('その他のメニュー').value, // その他メニューの入力を追加
+  staff: document.getElementById('staff')?.value || '',
+  phone: document.getElementById('phoneNumber')?.value || '',
+  comments: document.getElementById('comments')?.value || ''
 };
 
  // 送信メッセージの構築
@@ -472,9 +487,10 @@ if (reservation.preferences.length > 0) {
 // メニューの表示
 message += `メニュー: ${reservation.menu}`;
 if (reservation.menu === 'その他メニュー' && reservation.otherMenu) {
-  message += ` (${reservation.otherMenu})`;
+  message += ` (${reservation.otherMenu})`; // 入力された内容を追加
 }
 message += `\n`;
+
 
 // スタイリスト、電話番号、コメントの表示
 message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${reservation.phone}\nコメント: ${reservation.comments}`;
