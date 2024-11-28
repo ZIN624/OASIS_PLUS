@@ -213,28 +213,30 @@
 
   // 特定の日付の曜日を計算して、セレクトボックスに追加する関数
   function populateDays() {
-    const select = document.getElementById('day1');
-    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+  const select = document.getElementById('day1');
+  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
 
-    const today = new Date(); 
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth();
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 
+  const today = new Date(); 
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 
 
-    // 1日からその月の最終日までを表示
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(currentYear, currentMonth, day); 
-      const weekday = weekdays[date.getDay()];
+  // 1日からその月の最後の日までを表示
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(currentYear, currentMonth, day); 
+    const weekday = weekdays[date.getDay()];
 
-      // optionタグを作成
-      const option = document.createElement('option');
-      option.value = `${currentYear}-${currentMonth + 1}-${day}`; 
-      option.textContent = `${day} (${weekday})`; 
+    // optionタグを作成
+    const option = document.createElement('option');
+    
+    // ここを修正：フォーマットを変更
+    option.value = day; // 日付の数値のみを値として設定
+    option.textContent = `${day}日 (${weekday})`; // 表示テキストは「1日 (月)」のフォーマット
 
-      // セレクトボックスに追加
-      select.appendChild(option);
-    }
+    // セレクトボックスに追加
+    select.appendChild(option);
   }
+}
 
   // ページロード時にpopulateDaysを実行
   window.onload = populateDays;
