@@ -199,6 +199,7 @@
     <button type="submit"id="someButton">予約希望を送信</button>
   </form>
 
+  <script src="https://static.line-scdn.net/liff/2.1/sdk.js"></script>
 
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
 <script>
@@ -496,6 +497,14 @@ message += `\n`;
 message += `担当スタイリスト: ${reservation.staff}\n電話番号: ${reservation.phone}\nコメント: ${reservation.comments}`;
 
 console.log(message);  // メッセージ内容をコンソールに出力して確認
+
+liff.init({
+  liffId: '2006595194-AkL3pQ0D' // LINE Developersから取得したLIFF ID
+}).then(() => {
+  console.log('LIFF initialized');
+}).catch((error) => {
+  console.error('LIFF initialization failed:', error);
+});
 
 
   // LINEメッセージ送信
