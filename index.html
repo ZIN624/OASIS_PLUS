@@ -230,8 +230,8 @@
 
       // optionタグを作成
       const option = document.createElement('option');
-      option.value = `${currentYear}-${currentMonth + 1}-${day}`; 
-      option.textContent = `${day} (${weekday})`; 
+      option.value = day; 
+      option.textContent = `${day}日 (${weekday})`; 
 
       // セレクトボックスに追加
       select.appendChild(option);
@@ -495,12 +495,11 @@ if (reservation.preferences.length > 0) {
     if (pref.month && pref.day && pref.time) {
 // 曜日を計算して表示に追加
 const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-const date = new Date(2024, pref.month - 1, pref.day); // 月は0から始まるので-1をする
+const date = new Date(2024, pref.month - 1, pref.day);
 const weekday = weekdays[date.getDay()];
 
 // メッセージに曜日を追加して表示
-message += `第${ + 1}希望: ${pref.month}月${pref.day}日 (${weekday}) ${pref.time}時\n`;
-
+message += `第${index + 1}希望: ${pref.month}月${pref.day}日 (${weekday}) ${pref.time}時\n`;
 }});
 } else {
   message += '第2希望はありません。\n';  // 第2希望がない場合のメッセージ
