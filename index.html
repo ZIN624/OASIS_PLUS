@@ -526,6 +526,9 @@ console.log(message);  // メッセージ内容をコンソールに出力して
     text: message
   }]).then(function () {
     alert('予約内容が送信されました。');
+    setTimeout(function() {
+    liff.closeWindow();
+  }, 3000);
   }).catch(function (error) {
     alert('エラーが発生しました: ' + error.message || error);
   });
