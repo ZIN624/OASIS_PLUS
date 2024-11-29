@@ -85,7 +85,7 @@
 <body>
   
   <script src="https://static.line-scdn.net/liff/2.1/sdk.js"></script>
-  <h1>OASIS予約希望フォーム</h1>
+  <h1>OASIS<br>予約希望フォーム</h1>
 
   <form id="reservationForm">
     <!-- 名前 -->
@@ -525,7 +525,7 @@ console.log(message);  // メッセージ内容をコンソールに出力して
     type: 'text',
     text: message
   }]).then(function () {
-    alert('予約希望が送信されました！確認いたしますのでしばらくお待ちください！');
+    alert('予約希望が送信されました！\n確認いたしますのでしばらくお待ちください！');
     liff.closeWindow();
   }).catch(function (error) {
     alert('エラーが発生しました: ' + error.message || error);
