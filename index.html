@@ -525,10 +525,10 @@ console.log(message);  // メッセージ内容をコンソールに出力して
     type: 'text',
     text: message
   }]).then(function () {
-    alert('予約内容が送信されました。');
+    alert('予約希望が送信されました！確認いたしますのでしばらくお待ちください！');
     setTimeout(function() {
     liff.closeWindow();
-  }, 3000);
+  }, 2000);
   }).catch(function (error) {
     alert('エラーが発生しました: ' + error.message || error);
   });
