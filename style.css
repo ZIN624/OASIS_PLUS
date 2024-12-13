@@ -396,6 +396,7 @@ button:hover {
   height: auto;
   max-width: 100%;
   border-bottom: 1px solid #ddd;
+  display: block; 
 }
 
 .stylist-info {
@@ -433,7 +434,13 @@ button:hover {
     margin: 5px 0;
   }
 }
-
+/* スマホ向けにスタイリスト画像のサイズを制限 */
+@media screen and (max-width: 767px) {
+  .stylist-image img {
+    max-width: 80%;   /* スタイリスト画像が親要素の幅の80%以内で表示される */
+    margin: 0 auto;   /* 中央揃え */
+  }
+}
 .error-message {
   color: red;
   font-size: 0.9em;
