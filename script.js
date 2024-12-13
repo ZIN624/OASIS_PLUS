@@ -112,8 +112,6 @@ function populateSpecialWorkingDays() {
     }
   });
 }
-
-// 特別な営業日を追加する関数
 function addSpecialWorkingDay(newDay) {
   if (!newDay) {
     console.error('有効な日付を指定してください。');
@@ -124,16 +122,29 @@ function addSpecialWorkingDay(newDay) {
     // 配列に追加
     specialWorkingDays.push(newDay);
 
-    // セレクトボックスに反映
-    const option = document.createElement('option');
-    option.value = newDay;
-    option.textContent = newDay;
-    day1Select.appendChild(option);
+    // 日付順に並べ替え（昇順）
+    specialWorkingDays.sort((a, b) => new Date(a) - new Date(b));
+
+    // セレクトボックスをクリアして再構築
+    rebuildSelectOptions();
 
     console.log(`特別な営業日 ${newDay} を追加しました。`);
   } else {
     console.warn('この日付はすでに特別な営業日に含まれています。');
   }
+}
+
+function rebuildSelectOptions() {
+  // セレクトボックスをクリア
+  day1Select.innerHTML = '';
+
+  // 特別な営業日を追加
+  specialWorkingDays.forEach((day) => {
+    const option = document.createElement('option');
+    option.value = day;
+    option.textContent = day;
+    day1Select.appendChild(option);
+  });
 }
 
 // 初期ロード時に特別営業日を反映
