@@ -98,7 +98,50 @@ dates.forEach((dateObj, index) => {
   if (dateObj.isWeekend) {
     option.classList.add('red-day');
   }
+// 希望日の<select>要素を取得
+const day1Select = document.getElementById('day1');
 
+// 初期化: 特別営業日をセレクトボックスに反映
+function populateSpecialWorkingDays() {
+  specialWorkingDays.forEach((day) => {
+    if (!Array.from(day1Select.options).some((option) => option.value === day)) {
+      const option = document.createElement('option');
+      option.value = day;
+      option.textContent = day;
+      day1Select.appendChild(option);
+    }
+  });
+}
+
+// 特別な営業日を追加する関数
+function addSpecialWorkingDay(newDay) {
+  if (!newDay) {
+    console.error('有効な日付を指定してください。');
+    return;
+  }
+
+  if (!specialWorkingDays.includes(newDay)) {
+    // 配列に追加
+    specialWorkingDays.push(newDay);
+
+    // セレクトボックスに反映
+    const option = document.createElement('option');
+    option.value = newDay;
+    option.textContent = newDay;
+    day1Select.appendChild(option);
+
+    console.log(`特別な営業日 ${newDay} を追加しました。`);
+  } else {
+    console.warn('この日付はすでに特別な営業日に含まれています。');
+  }
+}
+
+// 初期ロード時に特別営業日を反映
+populateSpecialWorkingDays();
+
+// 使用例: 必要に応じて特別営業日を追加
+addSpecialWorkingDay('2024-12-31'); // 例: 2024-12-31を追加
+addSpecialWorkingDay('2025-01-01'); // 例: 2025-01-01を追加
   // 初期選択（第1希望のデフォルト選択を今日に設定）
   if (index === 0) {
     option.selected = true;
