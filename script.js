@@ -1,5 +1,5 @@
 liff.init({
-  liffId: '2006621786-8K7V4W3M',
+  liffId: '2006595194-AkL3pQ0D',
 }).then(() => {
   console.log('LIFF初期化成功');
   console.log('LIFF環境情報:', {
