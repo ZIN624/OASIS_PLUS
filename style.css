@@ -391,12 +391,11 @@ button:hover {
   background-color: #f9fff9;
 }
 
+/* スタイリスト画像のスタイル */
 .stylist-image img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  border-bottom: 1px solid #ddd;
-  display: block; 
+width: 100%;
+height: auto;
+border-bottom: 1px solid #ddd;
 }
 
 .stylist-info {
