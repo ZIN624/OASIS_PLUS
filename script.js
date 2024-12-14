@@ -18,149 +18,90 @@ liff.init({
 });
 
 
-// 営業する特別な日（祝日など）
-const specialWorkingDays = [
-'2024-12-30'  // 例: 12月23日（月曜日）を営業日として追加
-];
+// 特別営業日と休業日の定義
+const specialWorkingDays = ['2024-12-30'];
+const holidays = ['2024-12-31', '2025-01-01', '2025-01-02','2025-01-03','2025-01-12',];
 
-// 休業日を追加 (通常の休日)
-const holidays = [
-'2024-12-31',  // 休業日
-'2025-01-01',
-'2025-01-02',   // 休業日
-];
+// 日付生成関数（半年分）
+function generateDates(maxDays = 180) {
+  const today = new Date();
+  const dates = [];
 
-// 日付生成関数
-function generateDates() {
-const today = new Date();
-const maxDays = 180;  // 半年分の日付を生成
-const dates = [];
+  for (let i = 0; i < maxDays; i++) {
+    const currentDate = new Date(today);
+    currentDate.setDate(today.getDate() + i);
+    const dayOfWeek = currentDate.getDay();
 
-// 今日の日付を追加
-const formattedToday = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-const weekdayToday = ["日", "月", "火", "水", "木", "金", "土"][today.getDay()];
-const isWeekendToday = (today.getDay() === 0 || today.getDay() === 6);
+    // 月曜・火曜、または休業日はスキップ
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    if (dayOfWeek === 1 || dayOfWeek === 2 || holidays.includes(formattedDate)) continue;
 
-dates.push({
-  date: formattedToday,
-  weekday: weekdayToday,
-  isWeekend: isWeekendToday
-});
-
- // 明日以降の日付を追加
- for (let i = 1; i < maxDays; i++) {
-  const nextDate = new Date(today);
-  nextDate.setDate(today.getDate() + i); // iを1から始めて、今日の日付をスキップ
-  const dayOfWeek = nextDate.getDay();
-
-  // 月曜日と火曜日は除外
-  if (dayOfWeek === 1 || dayOfWeek === 2) continue;
-
-  // 日付をフォーマット
-  const formattedDate = `${nextDate.getFullYear()}-${(nextDate.getMonth() + 1).toString().padStart(2, '0')}-${nextDate.getDate().toString().padStart(2, '0')}`;
-
-  // 休暇日リストに含まれていれば、その日をスキップ
-  if (holidays.includes(formattedDate)) continue;
-
-  // 曜日を取得
-  const weekday = ["日", "月", "火", "水", "木", "金", "土"][nextDate.getDay()];
-
-  // 土日なら赤色をつける
-  const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);  // 日曜日(0)または土曜日(6)
-  
-  const dateWithStyle = {
-    date: formattedDate,
-    weekday: weekday,
-    isWeekend: isWeekend
-  };
-
-  dates.push(dateWithStyle);
-}
-
-return dates;
-}
-
-function populateDateOptions(selectId) {
-const daySelect = document.getElementById(selectId);
-const dates = generateDates();
-
-// 既存の選択肢をクリア
-daySelect.innerHTML = '';
-
-dates.forEach((dateObj, index) => {
-  const option = document.createElement('option');
-  option.value = dateObj.date;
-
-  // 日付と曜日を適切に表示
-  option.textContent = `${dateObj.date} (${dateObj.weekday})`;
-
-  // 土日にはクラス "red-day" を追加
-  if (dateObj.isWeekend) {
-    option.classList.add('red-day');
+    dates.push({
+      date: formattedDate,
+      weekday: ["日", "月", "火", "水", "木", "金", "土"][dayOfWeek],
+      isWeekend: dayOfWeek === 0 || dayOfWeek === 6,
+    });
   }
-// 希望日の<select>要素を取得
-const day1Select = document.getElementById('day1');
 
-// 初期化: 特別営業日をセレクトボックスに反映
-function populateSpecialWorkingDays() {
+  // 特別営業日を追加してソート
   specialWorkingDays.forEach((day) => {
-    if (!Array.from(day1Select.options).some((option) => option.value === day)) {
-      const option = document.createElement('option');
-      option.value = day;
-      option.textContent = day;
-      day1Select.appendChild(option);
+    if (!dates.some((d) => d.date === day)) {
+      const specialDate = new Date(day);
+      dates.push({
+        date: day,
+        weekday: ["日", "月", "火", "水", "木", "金", "土"][specialDate.getDay()],
+        isWeekend: specialDate.getDay() === 0 || specialDate.getDay() === 6,
+      });
     }
   });
-}
-function addSpecialWorkingDay(newDay) {
-  if (!newDay) {
-    console.error('有効な日付を指定してください。');
-    return;
-  }
 
-  if (!specialWorkingDays.includes(newDay)) {
-    // 配列に追加
-    specialWorkingDays.push(newDay);
-
-    // 日付順に並べ替え（昇順）
-    specialWorkingDays.sort((a, b) => new Date(a) - new Date(b));
-
-    // セレクトボックスをクリアして再構築
-    rebuildSelectOptions();
-
-    console.log(`特別な営業日 ${newDay} を追加しました。`);
-  } else {
-    console.warn('この日付はすでに特別な営業日に含まれています。');
-  }
+  // 日付順にソート
+  return dates.sort((a, b) => new Date(a.date) - new Date(b.date));
 }
 
-function rebuildSelectOptions() {
-  // セレクトボックスをクリア
-  day1Select.innerHTML = '';
+// セレクトボックスに日付を反映
+function populateDateOptions(selectId) {
+  const daySelect = document.getElementById(selectId);
+  const dates = generateDates();
 
-  // 特別な営業日を追加
-  specialWorkingDays.forEach((day) => {
+  // 既存の選択肢をクリア
+  daySelect.innerHTML = '';
+
+  dates.forEach((dateObj, index) => {
     const option = document.createElement('option');
-    option.value = day;
-    option.textContent = day;
-    day1Select.appendChild(option);
+    option.value = dateObj.date;
+    option.textContent = `${dateObj.date} (${dateObj.weekday})`;
+
+    // 土日は赤色クラスを適用
+    if (dateObj.isWeekend) {
+      option.classList.add('red-day');
+    }
+
+    // 最初の日付をデフォルト選択
+    if (index === 0) {
+      option.selected = true;
+    }
+
+    daySelect.appendChild(option);
   });
 }
 
-// 初期ロード時に特別営業日を反映
-populateSpecialWorkingDays();
-
-// 使用例: 必要に応じて特別営業日を追加
-addSpecialWorkingDay('2024-12-31'); // 例: 2024-12-31を追加
-addSpecialWorkingDay('2025-01-01'); // 例: 2025-01-01を追加
-  // 初期選択（第1希望のデフォルト選択を今日に設定）
-  if (index === 0) {
-    option.selected = true;
-  }
-
-  daySelect.appendChild(option);
+// 初期化処理
+document.addEventListener('DOMContentLoaded', () => {
+  populateDateOptions('day1'); // セレクトボックスのIDを指定
 });
+
+// 特別営業日を追加
+function addSpecialWorkingDay(newDay) {
+  if (!specialWorkingDays.includes(newDay)) {
+    specialWorkingDays.push(newDay);
+    console.log(`特別営業日 ${newDay} を追加しました。`);
+    populateDateOptions('day1');
+  } else {
+    console.warn(`${newDay} は既に特別営業日に含まれています。`);
+  }
 }
+
 // メニュー選択処理
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.menu-card').forEach(card => {
