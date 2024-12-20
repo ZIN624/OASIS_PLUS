@@ -21,19 +21,21 @@ liff.init({
 // 特別営業日と休業日の定義
 const specialWorkingDays = ['2024-12-30'];
 const holidays = ['2024-12-31', '2025-01-01', '2025-01-02','2025-01-03','2025-01-12',];
-
-// 日付生成関数（半年分）
 function generateDates(maxDays = 180) {
   const today = new Date();
   const dates = [];
 
+  // 今日の日付の基準をUTC 0時に固定
+  const startDate = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+
   for (let i = 0; i < maxDays; i++) {
-    const currentDate = new Date(today);
-    currentDate.setDate(today.getDate() + i);
-    const dayOfWeek = currentDate.getDay();
+    const currentDate = new Date(startDate);
+    currentDate.setUTCDate(startDate.getUTCDate() + i); // UTC日付を計算
+
+    const dayOfWeek = currentDate.getUTCDay(); // UTCベースの曜日を取得
+    const formattedDate = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD形式
 
     // 月曜・火曜、または休業日はスキップ
-    const formattedDate = currentDate.toISOString().split('T')[0];
     if (dayOfWeek === 1 || dayOfWeek === 2 || holidays.includes(formattedDate)) continue;
 
     dates.push({
@@ -58,6 +60,7 @@ function generateDates(maxDays = 180) {
   // 日付順にソート
   return dates.sort((a, b) => new Date(a.date) - new Date(b.date));
 }
+
 
 // セレクトボックスに日付を反映
 function populateDateOptions(selectId) {
