@@ -18,12 +18,54 @@ liff.init({
 });
 
 
+
+// 最初の同意事項
+
+// 同意チェックとボタン有効化
+const agreeCheck = document.getElementById('agreeCheck');
+const agreeBtn = document.getElementById('agreeBtn');
+const noticeArea = document.getElementById('noticeArea');
+const formArea = document.getElementById('formArea');
+
+agreeCheck.addEventListener('change', () => {
+  if (agreeCheck.checked) {
+    agreeBtn.disabled = false;
+    agreeBtn.classList.add('active');
+  } else {
+    agreeBtn.disabled = true;
+    agreeBtn.classList.remove('active');
+  }
+});
+
+
+
+// 同意ボタンを押したときの処理
+agreeBtn.addEventListener('click', () => {
+  // 同意画面を非表示
+  noticeArea.style.display = 'none';
+  // フォームを表示
+  formArea.style.display = 'block';
+  // フォームの先頭までスクロール
+  formArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+
+
+// 働く日はここで管理だよ------！！！
+
+
 // 特別営業日と休業日の定義
-const specialWorkingDays = ['2024-12-30'];
+const specialWorkingDays = [''];
 const holidays = ['2024-12-31', '2025-01-01', '2025-01-02','2025-01-03','2025-01-12',];
 function generateDates(maxDays = 180) {
   const today = new Date();
   const dates = [];
+
+
+
+
+
+
 
   // 今日の日付の基準をUTC 0時に固定
   const startDate = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
@@ -111,10 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('click', () => {
       // 全てのメニューカードから選択状態を解除
       document.querySelectorAll('.menu-card').forEach(c => c.classList.remove('selected'));
-      
+
       // クリックされたメニューカードを選択状態にする
       card.classList.add('selected');
-      
+
       // 選択されたメニューをhiddenフィールドに設定
       const selectedMenuInput = document.getElementById('selectedMenuInput');
       selectedMenuInput.value = card.dataset.menu;
@@ -486,7 +528,7 @@ document.getElementById('editReservation').addEventListener('click', function ()
 });
 
 // 確定ボタン
-document.getElementById('confirmReservation').addEventListener('click', function () {
+document.getElementById('agreeCheckbox').addEventListener('click', function () {
   const agreeChecked = document.getElementById('agreeCheckbox').checked;
   if (!agreeChecked) {
     alert('同意事項に同意してください');
@@ -533,7 +575,3 @@ if (reservationData.selectedMenuInput === "その他") {
     alert(`エラー: ${error.message}`);
   });
 });
-
-
-
-
