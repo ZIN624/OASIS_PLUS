@@ -26,6 +26,8 @@ const agreeCheck = document.getElementById('agreeCheck');
 const agreeBtn = document.getElementById('agreeBtn');
 const noticeArea = document.getElementById('noticeArea');
 const formArea = document.getElementById('formArea');
+const submit = document.getElementById('submitbtn')
+
 
 agreeCheck.addEventListener('change', () => {
   if (agreeCheck.checked) {
@@ -35,7 +37,14 @@ agreeCheck.addEventListener('change', () => {
   }
 });
 
-
+// 送信ボタン関係
+submit.addEventListener('change', () => {
+  if (agreeCheck.checked) {
+    agreeBtn.classList.add('active');
+  } else {
+    agreeBtn.classList.remove('active');
+  }
+});
 
 // 同意ボタンを押したときの処理
 agreeBtn.addEventListener('click', () => {
@@ -447,7 +456,7 @@ if (!gender) {
     username: document.getElementById('username')?.value.trim(),
     phone: document.getElementById('phoneNumber')?.value.trim(),
     selectedMenuInput: document.getElementById('selectedMenuInput')?.value.trim(),
-  otherMenuDetails: document.getElementById('その他のメニュー')?.value.trim() || '',
+    otherMenuDetails: document.getElementById('その他のメニュー')?.value.trim() || '',
     stylist: document.getElementById('selectedStylistInput')?.value.trim(),
     furigana: document.getElementById('furigana')?.value.trim(),
     gender: document.querySelector('input[name="gender"]:checked')?.value || '',
@@ -481,6 +490,7 @@ const detailsHTML = `
       ? `${reservationData.otherMenuDetails || '未入力'}` 
       : reservationData.selectedMenuInput || '未入力'}
   </p>
+  <p><strong>担当者</strong> ${reservationData.stylist || '未入力'}</p>
   ${reservationData.preferences.map((pref, index) => `
     <p><strong>第${index + 1}希望</strong> ${pref.date} ${pref.time}</p>
   `).join('')}
@@ -505,7 +515,9 @@ const detailsHTML = `
   }
 
   reservationForm.style.display = 'none'; // フォームを非表示
+  console.log('予約フォームを非表示にしました');
   reservationSummary.style.display = 'block'; // 確認エリアを表示
+  console.log('確認エリアを表示しました');
 
   console.log('フォームのスタイル:', getComputedStyle(reservationForm).display);
   console.log('確認エリアのスタイル:', getComputedStyle(reservationSummary).display);
