@@ -29,10 +29,8 @@ const formArea = document.getElementById('formArea');
 
 agreeCheck.addEventListener('change', () => {
   if (agreeCheck.checked) {
-    agreeBtn.disabled = false;
     agreeBtn.classList.add('active');
   } else {
-    agreeBtn.disabled = true;
     agreeBtn.classList.remove('active');
   }
 });
