@@ -3,23 +3,23 @@ body {
     padding: 40px;
     background-color: #f9f9f9;
     text-align: center;
-  }
-  
-  .notice {
+}
+
+.notice {
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     display: inline-block;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .checkbox-label {
+}
+
+.checkbox-label {
     display: block;
     margin: 20px 0;
     font-size: 16px;
-  }
-  
-  .agree-btn {
+}
+
+.agree-btn {
     display: inline-block;
     padding: 12px 30px;
     background-color: #ccc; /* 無効時はグレー */
@@ -30,11 +30,17 @@ body {
     pointer-events: none; /* クリック無効化 */
     opacity: 0.5;
     transition: opacity 0.3s, background-color 0.3s;
-  }
-  
-  .agree-btn.active {
+}
+
+.agree-btn.active {
     pointer-events: auto; /* クリック有効化 */
     opacity: 1;
     background-color: #28a745; /* 有効時はグリーン */
-  }
-  
+}
+.text {
+    border: solid 1px;
+    border-radius: 5%;
+    font-size: 1rem;
+    text-align: start;
+    padding: 1%;
+}
