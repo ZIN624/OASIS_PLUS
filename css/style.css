@@ -308,8 +308,8 @@ button:hover {
 }
 
 .menu-card {
-  flex: 0 1 calc(50% - 15px); /* flexプロパティを調整 */
-  max-width: 250px;  /* 最大幅を少し小さく */
+  flex: 0 1 100; /* flexプロパティを調整 */
+  max-width: 100%;  /* 最大幅を少し小さく */
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
@@ -319,7 +319,7 @@ button:hover {
   border: 2px solid #ddd;
   border-radius: 10px;
   padding: 15px;  /* パディングを調整 */
-  margin: 5px;  /* 追加のマージン */
+  margin: 1% 10%;  /* 追加のマージン */
   box-sizing: border-box;
 }
 
@@ -353,21 +353,21 @@ button:hover {
 }
 
 
-
+/* 
 @media (min-width: 768px) {
   .menu-card {
     flex: 0 1 calc(33.33% - 15px);
     max-width: 250px;
   }
-}
-
+} */
+/* 
 @media (max-width: 480px) {
   .menu-card {
     flex: 0 1 calc(100% - 10px);
     max-width: 100%;
     margin: 5px 0;
   }
-}
+} */
 
 /* スタイリストカードコンテナ */
 #stylist-container {
@@ -375,12 +375,12 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  padding: 10px;
+  padding: 10%;
   width: 100%;
   box-sizing: border-box;
 }
 
-.stylist-card {
+/* .stylist-card {
   flex: 0 1 calc(50% - 15px);
   max-width: 250px;
   aspect-ratio: 1 / 1;
@@ -394,8 +394,22 @@ button:hover {
   padding: 15px;
   margin: 5px;
   box-sizing: border-box;
+} */
+.stylist-card {
+  flex: 0 1 100%; /* まずは1列ベース */
+  max-width: 100%;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  box-sizing: border-box;
 }
-
 .stylist-card:hover {
   transform: translateY(-10px);
 }
@@ -403,9 +417,9 @@ button:hover {
 /* この範囲が特例
 消すときにはhtmlのclassも調整 */
 .stylist-card-oka{
-  flex: 0 1 calc(50% - 15px);
-  max-width: 250px;
-  aspect-ratio: 1 / 1;
+  flex: 0 1 100%; /* まずは1列ベース */
+  max-width: 100%;
+  margin: 5px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -416,7 +430,7 @@ button:hover {
   padding: 15px;
   margin: 5px;
   box-sizing: border-box;
-  background-color: rgb(209, 209, 209);
+  background-color: rgb(206, 206, 206);
   opacity: 0.8;
 }
 
@@ -448,7 +462,7 @@ button:hover {
   font-size: 16px;
   color: #666;
 }
-
+/*
 @media (min-width: 768px) {
   #stylist-container {
     flex-direction: row;
@@ -459,22 +473,35 @@ button:hover {
     flex: 0 1 calc(33.33% - 15px);
     max-width: 250px;
   }
-}
+} */
+/* @media (min-width: 768px) {
+  #stylist-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-@media (max-width: 480px) {
+  .stylist-card {
+    flex: 0 1 calc(33.33% - 15px);
+    max-width: 250px;
+  }
+} */
+
+
+/* @media (max-width: 480px) {
   .stylist-card {
     flex: 0 1 calc(100% - 10px);
     max-width: 100%;
     margin: 5px 0;
   }
 }
-/* スマホ向けにスタイリスト画像のサイズを制限 */
+スマホ向けにスタイリスト画像のサイズを制限 */
 @media screen and (max-width: 767px) {
   .stylist-image img {
     max-width: 80%;   /* スタイリスト画像が親要素の幅の80%以内で表示される */
     margin: 0 auto;   /* 中央揃え */
   }
 }
+
 .error-message {
   color: red;
   font-size: 0.9em;
