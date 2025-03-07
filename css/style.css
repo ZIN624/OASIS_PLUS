@@ -1,61 +1,64 @@
-/* 基本的なスタイル */
+/* 全体設定 */
+html {
+  font-size: 100%; /* 基準16px */
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #fff;
   color: #333;
   margin: 0;
   padding: 0;
+  font-size: 1.6rem; /* スマホ基準 */
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* 見出し */
 h1 {
   text-align: center;
-  color: #FFF;
-  margin-top: 20px;
+  color: #fff;
+  margin-top: 2rem;
   background-color: #4CAF50;
-  padding: 10px 0;
+  padding: 1rem 0;
+  font-size: 2.4rem;
 }
-h2 {
+
+h2, h3 {
   font-size: 2rem;
 }
-h3 {
-  font-size: 2rem;
-}
+
 .title {
   font-size: 2rem;
   color: #4CAF50;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
-.date-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.text {
+  border: solid 1px;
+  border-radius: 5%;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  text-align: start;
+  padding: 3%;
 }
 
+/* 入力エリア */
 .input-wrapper {
-  margin: 10px;
+  margin: 1rem;
 }
 
 .input-label {
-  font-size: 1.2em;
-  margin-bottom: 5px;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
   display: block;
 }
 
 .input-select,
 .input-field,
 .input-textarea {
-  font-size: 1em;
-  padding: 10px;
+  font-size: 1.6rem;
+  padding: 1rem;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -71,56 +74,378 @@ h3 {
   background-color: #fff;
 }
 
+.error-message {
+  color: red;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+.error-field {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+/* 必須マーク */
+.required {
+  color: white;
+  background-color: red;
+  padding: 0.2rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+  margin-left: 0.8rem;
+}
+
+/* ボタン系 */
 button {
-  padding: 12px;
-  font-size: 1.5em;
+  padding: 1.2rem;
+  font-size: 1.6rem;
   background-color: #4CAF50;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   width: 100%;
-  height: 100px;
+  height: auto;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
-#other-input-container {
-  display: none;
-}
-
-#addSecondChoice, #addThirdChoice {
-  margin: 10px 0;
-  height: 60px;
-  font-size: 1.5em;
-}
-
-/* 土日を赤く表示 */
-.red-day {
-  color: red;
-}
-
-.hidden {
-  display: none;
-}
-
-/* 送信ボタンのスタイル */
-#submitReservation {
-  padding: 10px 20px;
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
   background-color: #4CAF50;
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 32px;
+  border-radius: 8px;
+  margin: 1rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn:hover {
+  background-color: #317534;
+}
+
+/* 追加ボタン */
+#addSecondChoice, #addThirdChoice {
+  margin: 1rem 0;
+  height: auto;
+  font-size: 1.6rem;
+  padding: 1rem;
+}
+
+/* 送信ボタン */
+#submitReservation {
+  padding: 1.2rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
 }
 
 #submitReservation:hover {
-  background-color: #4CAF50;
+  background-color: #45a049;
 }
 
-/* モーダル関連 */
+/* メニューコンテナ */
+#menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-card {
+  flex: 0 1 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-sizing: border-box;
+}
+
+.menu-card:hover {
+  transform: translateY(-1rem);
+}
+
+.menu-card.selected {
+  border: 3px solid #4CAF50;
+  box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #f9fff9;
+}
+
+.menu-image img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+/* スタイリストカードコンテナ */
+#stylist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 10%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stylist-card,
+.stylist-card-oka {
+  flex: 0 1 100%;
+  max-width: 100%;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.stylist-card-oka {
+  background-color: rgb(206, 206, 206);
+  opacity: 0.8;
+}
+
+.stylist-card:hover {
+  transform: translateY(-1rem);
+}
+
+.stylist-card.selected {
+  border: 3px solid #4CAF50;
+  box-shadow: 0 0.8rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #f9fff9;
+}
+
+/* スタイリスト画像 */
+.stylist-image img {
+  width: 80%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  margin: 0 auto;
+}
+
+.stylist-info {
+  padding: 1rem;
+}
+
+.stylist-info h3 {
+  margin: 1rem 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.stylist-info p {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #666;
+}
+
+/* 確認エリア */
+#reservationSummary {
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+}
+
+#reservationSummary h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: 2rem;
+}
+
+#reservationSummary p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+#summaryDetails {
+  font-size: 1.6rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+#reservationSummary .section-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+#reservationSummary .section {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+#reservationSummary strong {
+  color: #4CAF50;
+}
+
+#reservationSummary .highlight {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+#editReservation, #confirmReservation {
+  font-size: 2rem;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#agreement-summary {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f3f3f3;
+  border-radius: 0.8rem;
+  border: 1px solid #ccc;
+}
+
+#agreement-summary h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+#agreement-summary ul {
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+
+#agreement-summary ul li {
+  margin-bottom: 0.8rem;
+  font-size: 1.6rem;
+  color: red;
+}
+
+#agreement-summary label {
+  font-size: 1.6rem;
+  color: #4CAF50;
+  cursor: pointer;
+}
+
+#agreement-summary input[type="checkbox"] {
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+}
+
+#reservationSummary .required {
+  font-size: 1.6rem;
+  color: red;
+  font-weight: bold;
+}
+
+/* お知らせエリア */
+.notice {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 1rem;
+  display: inline-block;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+  font-size: 1.6rem;
+}
+
+.checkbox-label {
+  display: block;
+  margin: 2rem 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.text {
+  border: solid 1px;
+  border-radius: 5%;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  text-align: start;
+  padding: 3%;
+}
+
+/* 同意ボタン */
+.agree-btn {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background-color: #ccc; /* 無効時はグレー */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  opacity: 0.5;
+  pointer-events: none; /* 初期は無効 */
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.agree-btn.active {
+  pointer-events: auto; /* 有効化 */
+  opacity: 1;
+  background-color: #28a745; /* 有効時のグリーン */
+}
+
+/* エラーメッセージ */
+.error-message {
+  color: red;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+.error-field {
+  border: 0.2rem solid red;
+  background-color: #ffe6e6;
+}
+
+/* 必須ラベル */
+.required {
+  color: white;
+  background-color: red;
+  padding: 0.2rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 0.4rem;
+  margin-left: 0.8rem;
+}
+
+/* 土日祝の赤字 */
+.red-day {
+  color: red;
+}
+
+/* モーダル */
 .modal {
   display: none;
   position: fixed;
@@ -136,18 +461,18 @@ button:hover {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
+  padding: 2rem;
   border: 1px solid #888;
   width: 80%;
   height: 80%;
   overflow: auto;
-  font-size: 18px;
+  font-size: 1.6rem;
 }
 
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 2.8rem;
   font-weight: bold;
 }
 
@@ -158,408 +483,34 @@ button:hover {
   cursor: pointer;
 }
 
+/* 汎用ボタン */
 .btn {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   background-color: #4CAF50;
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 2rem;
+  border-radius: 0.8rem;
 }
 
 .btn:hover {
   background-color: #317534;
 }
 
-#summaryDetails {
-  font-size: 20px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-/* 確認エリアのスタイル */
-#reservationSummary {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#reservationSummary h2 {
-  text-align: center;
-  font-size: 2em;
-  color: #4CAF50;
-  margin-bottom: 20px;
-}
-
-#reservationSummary p {
-  font-size: 1.2em;
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-
-#reservationSummary .section-title {
-  font-size: 1.4em;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-#reservationSummary .section {
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 6px;
-  margin-bottom: 20px;
-}
-
-#reservationSummary strong {
-  color: #4CAF50;
-}
-
-#reservationSummary .highlight {
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-/* ボタンのサイズ調整 */
-#editReservation, #confirmReservation {
-  font-size: 30px;
-  padding: 12px;
-  margin: 10px 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  #reservationSummary {
-    padding: 10px;
-  }
-}
-
-/* 横長ボックスのデザイン */
-.required {
-  color: white;
-  background-color: red;
-  padding: 2px 10px;
-  font-size: 0.5em;
-  font-weight: bold;
-  display: inline-block;
-  border-radius: 4px;
-  margin-left: 8px;
-}
-
-/* 同意事項のセクション */
-#agreement-summary {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f3f3f3;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-#agreement-summary h3 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-#agreement-summary ul {
-  margin-top: 10px;
-  padding-left: 20px;
-}
-
-#agreement-summary ul li {
-  margin-bottom: 8px;
-  font-size: 1.2em;
-  color: red;
-}
-
-.highlighted {
-  font-weight: bold;
-}
-
-#agreement-summary label {
-  font-size: 1.6em;
-  color: #4CAF50;
-  cursor: pointer;
-}
-
-/* チェックボックスのスタイル */
-#agreement-summary input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-top: 5px;
-  margin-right: 10px;
-}
-
-#reservationSummary .required {
-  font-size: 1.2em;
-  color: red;
-  font-weight: bold;
-}
-
-/* メニューコンテナ */
-#menu-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.menu-card {
-  flex: 0 1 100; /* flexプロパティを調整 */
-  max-width: 100%;  /* 最大幅を少し小さく */
-  aspect-ratio: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;  /* パディングを調整 */
-  margin: 1% 10%;  /* 追加のマージン */
-  box-sizing: border-box;
-}
-
-.menu-card:hover {
-  transform: translateY(-10px); /* ホバー時に浮き上がるエフェクト */
-}
-
-.menu-card.selected {
-  border: 3px solid #4CAF50; /* 選択されたメニューカードの枠線 */
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15); /* 選択時の影 */
-  background-color: #f9fff9; /* 選択時の背景色 */
-}
-
-.menu-image img {
-  width: 100%; /* 画像を親要素に合わせる */
-  height: auto; /* アスペクト比を保つ */
-  max-width: 100%; /* 親要素を超えないようにする */
-  border-bottom: 1px solid #ddd;
-}
-.agree-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-#formArea {
+/* 横長ボックス */
+#other-input-container {
   display: none;
 }
 
-
-/* 
-@media (min-width: 768px) {
-  .menu-card {
-    flex: 0 1 calc(33.33% - 15px);
-    max-width: 250px;
-  }
-} */
-/* 
-@media (max-width: 480px) {
-  .menu-card {
-    flex: 0 1 calc(100% - 10px);
-    max-width: 100%;
-    margin: 5px 0;
-  }
-} */
-
-/* スタイリストカードコンテナ */
-#stylist-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 1% 10%;
-  width: 100%;
-  box-sizing: border-box;
+/* 追加希望ボタン */
+#addSecondChoice, #addThirdChoice {
+  margin: 1rem 0;
+  height: 6rem;
+  font-size: 1.6rem;
 }
 
-/* .stylist-card {
-  flex: 0 1 calc(50% - 15px);
-  max-width: 250px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 5px;
-  box-sizing: border-box;
-} */
-.stylist-card {
-  flex: 0 1 100%; /* まずは1列ベース */
-  max-width: 100%;
-  margin: 5px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 5px;
-  box-sizing: border-box;
-}
-.stylist-card:hover {
-  transform: translateY(-10px);
-}
-
-/* この範囲が特例
-消すときにはhtmlのclassも調整 */
-.stylist-card-oka{
-  flex: 0 1 100%; /* まずは1列ベース */
-  max-width: 100%;
-  margin: 5px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 5px;
-  box-sizing: border-box;
-  background-color: rgb(206, 206, 206);
-  opacity: 0.8;
-}
-
-.stylist-card.selected {
-  border: 3px solid #4CAF50;
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
-  background-color: #f9fff9;
-}
-
-/* スタイリスト画像のスタイル */
-.stylist-image img {
-  width: 80%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
-  }
-
-.stylist-info {
-  padding: 10px;
-}
-
-.stylist-info h3 {
-  margin: 10px 0;
-  font-size: 2rem;
-  color: #333;
-}
-
-.stylist-info p {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #666;
-}
-/*
-@media (min-width: 768px) {
-  #stylist-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .stylist-card {
-    flex: 0 1 calc(33.33% - 15px);
-    max-width: 250px;
-  }
-} */
-/* @media (min-width: 768px) {
-  #stylist-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .stylist-card {
-    flex: 0 1 calc(33.33% - 15px);
-    max-width: 250px;
-  }
-} */
-
-
-/* @media (max-width: 480px) {
-  .stylist-card {
-    flex: 0 1 calc(100% - 10px);
-    max-width: 100%;
-    margin: 5px 0;
-  }
-}
-スマホ向けにスタイリスト画像のサイズを制限 */
-@media screen and (max-width: 767px) {
-  .stylist-image img {
-    max-width: 80%;   /* スタイリスト画像が親要素の幅の80%以内で表示される */
-    margin: 0 auto;   /* 中央揃え */
-  }
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
-}
-
-.error-field {
-  border: 2px solid red;
-  background-color: #ffe6e6;
-}
-
-
-.notice {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  display: inline-block;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 2rem;
-}
-
-.checkbox-label {
-  display: block;
-  margin: 20px 0;
-  font-size: 2rem;
-  text-align: center
-}
-
-.agree-btn {
-  display: inline-block;
-  padding: 12px 30px;
-  background-color: #ccc; /* 無効時はグレー */
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  font-size: 2rem;
-  opacity: 0.5;
-  pointer-events: none; /* 初期は無効 */
-  transition: opacity 0.3s, background-color 0.3s;
-}
-
-.agree-btn.active {
-  pointer-events: auto; /* 有効化 */
-  opacity: 1;
-  background-color: #28a745; /* 有効時のグリーン */
-}
-
-
-.text {
-  border: solid 1px;
-  border-radius: 5%;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  text-align: start;
-  padding: 3%;
+/* スクロール設定 */
+html {
+  scroll-behavior: smooth;
 }
