@@ -1,7 +1,7 @@
 /* 基本的なスタイル */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f8f8f8;
+  background-color: #fff;
   color: #333;
   margin: 0;
   padding: 0;
@@ -18,9 +18,14 @@ h1 {
   background-color: #4CAF50;
   padding: 10px 0;
 }
-
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 2rem;
+}
 .title {
-  font-size: 1.6em;
+  font-size: 2rem;
   color: #4CAF50;
   margin-bottom: 10px;
   text-align: center;
@@ -375,7 +380,7 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  padding: 10%;
+  padding: 1% 10%;
   width: 100%;
   box-sizing: border-box;
 }
@@ -442,7 +447,7 @@ button:hover {
 
 /* スタイリスト画像のスタイル */
 .stylist-image img {
-  width: 100%;
+  width: 80%;
   height: auto;
   border-bottom: 1px solid #ddd;
   }
@@ -453,13 +458,13 @@ button:hover {
 
 .stylist-info h3 {
   margin: 10px 0;
-  font-size: 20px;
+  font-size: 2rem;
   color: #333;
 }
 
 .stylist-info p {
   margin: 0;
-  font-size: 16px;
+  font-size: 1.8rem;
   color: #666;
 }
 /*
