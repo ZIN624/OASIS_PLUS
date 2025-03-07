@@ -511,16 +511,18 @@ button:hover {
   text-decoration: none;
   border-radius: 5px;
   font-size: 2rem;
-  pointer-events: none; /* クリック無効化 */
   opacity: 0.5;
+  pointer-events: none; /* 初期は無効 */
   transition: opacity 0.3s, background-color 0.3s;
 }
 
 .agree-btn.active {
-  pointer-events: auto; /* クリック有効化 */
+  pointer-events: auto; /* 有効化 */
   opacity: 1;
-  background-color: #28a745; /* 有効時はグリーン */
+  background-color: #28a745; /* 有効時のグリーン */
 }
+
+
 .text {
   border: solid 1px;
   border-radius: 5%;
