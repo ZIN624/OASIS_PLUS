@@ -1,21 +1,21 @@
-// liff.init({
-//   liffId: '2006595194-AkL3pQ0D',
-// }).then(() => {
-//   console.log('LIFF初期化成功');
-//   console.log('LIFF環境情報:', {
-//     isInClient: liff.isInClient(),
-//     isLoggedIn: liff.isLoggedIn(),
-//     language: liff.getLanguage(),
-//     context: liff.getContext()
-//   });
-// }).catch((error) => {
-//   console.error('LIFF初期化エラー:', error);
-//   console.error('エラー詳細:', JSON.stringify(error, null, 2));
-//   alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
-//         '1. インターネット接続\n' +
-//         '2. LINEアプリ内で開いているか\n' +
-//         '3. LIFF IDが正しいか');
-// });
+liff.init({
+  liffId: '2006595194-AkL3pQ0D',
+}).then(() => {
+  console.log('LIFF初期化成功');
+  console.log('LIFF環境情報:', {
+    isInClient: liff.isInClient(),
+    isLoggedIn: liff.isLoggedIn(),
+    language: liff.getLanguage(),
+    context: liff.getContext()
+  });
+}).catch((error) => {
+  console.error('LIFF初期化エラー:', error);
+  console.error('エラー詳細:', JSON.stringify(error, null, 2));
+  alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
+        '1. インターネット接続\n' +
+        '2. LINEアプリ内で開いているか\n' +
+        '3. LIFF IDが正しいか');
+});
 
 
 
