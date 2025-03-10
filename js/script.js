@@ -508,13 +508,13 @@ const detailsHTML = `
 
   // 確認エリアの表示切り替え
   const reservationSummary = document.getElementById('reservationSummary');
-  const reservationForm = document.getElementById('reservationForm');
+  const formArea = document.getElementById('formArea');
   if (!reservationSummary || !reservationForm) {
     console.error('reservationSummary または reservationForm 要素が見つかりません！');
     return;
   }
 
-  reservationForm.style.display = 'none'; // フォームを非表示
+  formArea.style.display = 'none'; // フォームを非表示
   console.log('予約フォームを非表示にしました');
   reservationSummary.style.display = 'block'; // 確認エリアを表示
   console.log('確認エリアを表示しました');
