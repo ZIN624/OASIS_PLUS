@@ -26,7 +26,7 @@ const agreeCheck = document.getElementById('agreeCheck');
 const agreeBtn = document.getElementById('agreeBtn');
 const noticeArea = document.getElementById('noticeArea');
 const formArea = document.getElementById('formArea');
-const submit = document.getElementById('submitbtn')
+const submitagree = document.getElementById('submitbtn')
 
 
 agreeCheck.addEventListener('change', () => {
@@ -38,13 +38,13 @@ agreeCheck.addEventListener('change', () => {
 });
 
 // 送信ボタン関係
-submit.addEventListener('change', () => {
-  if (agreeCheck.checked) {
-    agreeBtn.classList.add('active');
-  } else {
-    agreeBtn.classList.remove('active');
-  }
-});
+// .addEventListener('change', () => {
+//   if (agreeCheck.checked) {
+//     agreeBtn.classList.add('active');
+//   } else {
+//     agreeBtn.classList.remove('active');
+//   }
+// });
 
 // 同意ボタンを押したときの処理
 agreeBtn.addEventListener('click', () => {
