@@ -1,21 +1,21 @@
-liff.init({
-  liffId: '2006595194-AkL3pQ0D',
-}).then(() => {
-  console.log('LIFF初期化成功');
-  console.log('LIFF環境情報:', {
-    isInClient: liff.isInClient(),
-    isLoggedIn: liff.isLoggedIn(),
-    language: liff.getLanguage(),
-    context: liff.getContext()
-  });
-}).catch((error) => {
-  console.error('LIFF初期化エラー:', error);
-  console.error('エラー詳細:', JSON.stringify(error, null, 2));
-  alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
-        '1. インターネット接続\n' +
-        '2. LINEアプリ内で開いているか\n' +
-        '3. LIFF IDが正しいか');
-});
+// liff.init({
+//   liffId: '2006595194-AkL3pQ0D',
+// }).then(() => {
+//   console.log('LIFF初期化成功');
+//   console.log('LIFF環境情報:', {
+//     isInClient: liff.isInClient(),
+//     isLoggedIn: liff.isLoggedIn(),
+//     language: liff.getLanguage(),
+//     context: liff.getContext()
+//   });
+// }).catch((error) => {
+//   console.error('LIFF初期化エラー:', error);
+//   console.error('エラー詳細:', JSON.stringify(error, null, 2));
+//   alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
+//         '1. インターネット接続\n' +
+//         '2. LINEアプリ内で開いているか\n' +
+//         '3. LIFF IDが正しいか');
+// });
 
 
 
@@ -508,13 +508,13 @@ const detailsHTML = `
 
   // 確認エリアの表示切り替え
   const reservationSummary = document.getElementById('reservationSummary');
-  const formArea = document.getElementById('formArea');
+  const reservationForm = document.getElementById('reservationForm');
   if (!reservationSummary || !reservationForm) {
     console.error('reservationSummary または reservationForm 要素が見つかりません！');
     return;
   }
 
-  formArea.style.display = 'none'; // フォームを非表示
+  reservationForm.style.display = 'none'; // フォームを非表示
   console.log('予約フォームを非表示にしました');
   reservationSummary.style.display = 'block'; // 確認エリアを表示
   console.log('確認エリアを表示しました');
@@ -549,11 +549,11 @@ document.getElementById('agreeCheckbox').addEventListener('click', function () {
   // 空でないデータのみメッセージに追加
   if (reservationData.username) message += `\n予約者名: ${reservationData.username}様\n`;
   if (reservationData.furigana) message += `フリガナ: ${reservationData.furigana}様\n`;
-if (reservationData.gender) message += `性別: ${reservationData.gender}\n`;
+  if (reservationData.gender) message += `性別: ${reservationData.gender}\n`;
   if (reservationData.phone) message += `電話番号: ${reservationData.phone}\n`;
  // メニューの処理
 // LINEに送信するメッセージ（confirmReservationイベントリスナー内）
-if (reservationData.selectedMenuInput === "その他") {
+  if (reservationData.selectedMenuInput === "その他") {
   const otherMenuDetails = reservationData.otherMenuDetails || '（詳細未入力）';
   message += `メニュー:${otherMenuDetails}\n`;
 } else {
