@@ -7,16 +7,17 @@
 </head>
 <body>
 
+
 <div class="notice" id="noticeArea">
     <h1>重要なお知らせ</h1>
     <div class="text">
         <p>いつも OASIS PLUS をご愛顧いただき、誠にありがとうございます。<br>
             <br>
-            この度、岡崎 菜月（チーフ） が体調不良のため、3月中のご予約を承ることができない状況 となりました。<br><br>
+            この度、<span>岡崎 菜月（チーフ）</span> が体調不良のため、<span>4月中</span>のご予約を承ることができない状況 となりました。<br><br>
             お客様にはご迷惑とご不便をおかけしますが、何卒ご理解とご協力を賜りますようお願い申し上げます。
             <br><br>
             なお、ご予約につきましては、カルテをしっかり共有の上、
-            堀町店 および PLUS店 にて対応させていただきます。
+            <SPAN>堀町店 および PLUS店</SPAN>にて対応させていただきます。
             <br><br>
             ご希望がございましたら、
             LINE・備考欄・お電話 にてお気軽にご相談くださいませ。
@@ -25,13 +26,14 @@
         </p>
     </div>
     <label class="checkbox-label">
-        <input type="checkbox" id="agreeCheck">
-        内容に同意する
+        <input type="checkbox" id="agreeCheck" class="checkbox-box">
+        内容確認しました
     </label>
 
     <button id="agreeBtn" class="agree-btn">同意して次へ</button>
-
 </div>
+
+
 
 <div class="form-area" id="formArea" style="display:none;">
     <h1>OASIS<br>予約希望フォーム</h1>
@@ -51,22 +53,27 @@
                 <li>ご不明点は店舗までお問い合わせください。（備考欄、LINEチャット、お電話で対応します）</li>
                 <li class="highlighted">ご予約は先にご予約いただいているお客様が優先となります。ご希望に添えない場合もございますので、あらかじめご了承ください。</li>
             </ul>
-            <label><input type="checkbox" id="agreeCheckbox"> 同意する</label>
+            <label><input type="checkbox" id="agreeCheckbox"  > 同意する</label>
+            <button id="submitbtn" class="submit-btn">送信する</button>
         </div>
     </div>
+
     <form id="reservationForm">
+
         <!-- 名前 -->
         <h2 class="title">予約者名 </h2>
         <div class="input-wrapper">
             <label for="username" class="input-label">予約者名:<span class="required">必須</span></label>
             <input type="text" id="username" name="username" placeholder="オアシス太郎" class="input-field" required><br><br>
         </div>
+
         <!-- フリガナ -->
         <h2 class="title">フリガナ </h2>
         <div class="input-wrapper">
             <label for="furigana" class="input-label">フリガナ:<span class="required">必須</span></label>
             <input type="text" id="furigana" name="furigana" placeholder="オアシスタロウ" class="input-field" required><br><br>
         </div>
+
         <!-- 性別 -->
         <h2 class="title">性別</h2>
         <div class="input-wrapper">
@@ -75,7 +82,9 @@
             <label><input type="radio" id="female" name="gender" value="女性"> 女性</label>
             <label><input type="radio" id="other" name="gender" value="その他"> その他</label>
         </div>
+
     </form>
+
         <!-- 第1希望 -->
     <h2 class="title">第1希望<span class="required">必須</span></h2>
     <div class="date-container">
