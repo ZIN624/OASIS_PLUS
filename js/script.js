@@ -1,21 +1,21 @@
-liff.init({
-  liffId: '2006595194-AkL3pQ0D',
-}).then(() => {
-  console.log('LIFF初期化成功');
-  console.log('LIFF環境情報:', {
-    isInClient: liff.isInClient(),
-    isLoggedIn: liff.isLoggedIn(),
-    language: liff.getLanguage(),
-    context: liff.getContext()
-  });
-}).catch((error) => {
-  console.error('LIFF初期化エラー:', error);
-  console.error('エラー詳細:', JSON.stringify(error, null, 2));
-  alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
-        '1. インターネット接続\n' +
-        '2. LINEアプリ内で開いているか\n' +
-        '3. LIFF IDが正しいか');
-});
+// liff.init({
+//   liffId: '2006595194-AkL3pQ0D',
+// }).then(() => {
+//   console.log('LIFF初期化成功');
+//   console.log('LIFF環境情報:', {
+//     isInClient: liff.isInClient(),
+//     isLoggedIn: liff.isLoggedIn(),
+//     language: liff.getLanguage(),
+//     context: liff.getContext()
+//   });
+// }).catch((error) => {
+//   console.error('LIFF初期化エラー:', error);
+//   console.error('エラー詳細:', JSON.stringify(error, null, 2));
+//   alert('LIFF初期化に失敗しました。以下の点を確認してください：\n' +
+//         '1. インターネット接続\n' +
+//         '2. LINEアプリ内で開いているか\n' +
+//         '3. LIFF IDが正しいか');
+// });
 
 
 
@@ -62,8 +62,8 @@ agreeBtn.addEventListener('click', () => {
 
 
 // 特別営業日と休業日の定義
-const specialWorkingDays = ['2025-05-05'];
-const holidays = ['2024-12-31', '2025-01-01', '2025-01-02','2025-01-03','2025-01-12','2025-05-04',];
+const specialWorkingDays = [''];
+const holidays = ['2024-12-31', '2025-01-01', '2025-01-02','2025-01-03','2025-01-12',];
 function generateDates(maxDays = 180) {
   const today = new Date();
   const dates = [];
@@ -573,6 +573,16 @@ document.getElementById('agreeCheckbox').addEventListener('click', function () {
   message += `\n\nご記入いただきありがとうございます！\nただいま確認いたしますのでお待ちください！🙏⏳`;
 
   console.log('送信するメッセージ:', message);  // 送信前にメッセージを確認
+  
+  // 送信ボタン押下時にGA4イベントを送信
+document.getElementById("submitReservation").addEventListener("click", function () {
+  gtag('event', 'form_submit', {
+    event_category: '予約',
+    event_label: 'OASIS予約フォーム送信',
+    value: 1
+  });
+});
+
 
   // メッセージをLINEに送信
   liff.sendMessages([{
