@@ -573,15 +573,13 @@ document.getElementById('agreeCheckbox').addEventListener('click', function () {
   message += `\n\nご記入いただきありがとうございます！\nただいま確認いたしますのでお待ちください！🙏⏳`;
 
   console.log('送信するメッセージ:', message);  // 送信前にメッセージを確認
-  
+
   // 送信ボタン押下時にGA4イベントを送信
-document.getElementById("submitReservation").addEventListener("click", function () {
   gtag('event', 'form_submit', {
     event_category: '予約',
     event_label: 'OASIS予約フォーム送信',
     value: 1
   });
-});
 
 
   // メッセージをLINEに送信
