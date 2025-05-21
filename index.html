@@ -21,25 +21,28 @@
       })(window, document, "clarity", "script", "rg5tervkjw");
   </script>
 </head>
-<body>
 
+<body>
 
 <div class="notice" id="noticeArea">
     <h1>重要なお知らせ</h1>
     <div class="text">
-        <p>いつも OASIS PLUS をご愛顧いただき、誠にありがとうございます。<br>
-            <br>
-            この度、<span>岡崎 菜月（チーフ）</span> が体調不良のため、<span>5月半ば</span>までご予約を承ることができない状況となりました。<br><br>
-            お客様にはご迷惑とご不便をおかけしますが、何卒ご理解とご協力を賜りますようお願い申し上げます。
-            <br><br>
-            なお、ご予約につきましては、カルテをしっかり共有の上、
-            <SPAN>堀町店 および PLUS店</SPAN>にて対応させていただきます。
-            <br><br>
-            ご希望がございましたら、
-            LINE・備考欄・お電話 にてお気軽にご相談くださいませ。
-            <br><br>
-            何卒よろしくお願い申し上げます。
+        <p>いつも OASIS PLUS をご愛顧いただき、誠にありがとうございます。<br><br>
+
+この度、体調不良によりお休みをいただいておりました <span>岡崎 菜月（チーフ）</span> ですが、<span>堀町店にて少しずつ復帰</span>をさせていただくこととなりました。<br><br>
+
+本格的な復帰までは今しばらくお時間をいただきますが、体調を見ながらのご案内となりますことを、何卒ご理解賜りますようお願い申し上げます。<br><br>
+
+ご予約につきましては、<span>堀町店公式LINE</span>にて対応させていただきます。<br><br>
+
+ご希望やご不明点がございましたら、<span>LINE・備考欄・お電話</span>にてお気軽にご相談くださいませ。<br><br>
+
+今後ともどうぞよろしくお願い申し上げます。
         </p>
+
+    <div class="hori_btn">
+        <a class="hori_btn__link" href="https://lin.ee/HWLASnK">堀町公式LINE</a>
+    </div>
     </div>
     <label class="checkbox-label">
         <input type="checkbox" id="agreeCheck" class="checkbox-box">
@@ -47,12 +50,25 @@
     </label>
 
     <button id="agreeBtn" class="agree-btn">同意して次へ</button>
+    <button id="agreeBtn" class="agree-btn">同意して次へ</button>
 </div>
 
 
 
-<div class="form-area" id="formArea" style="display:none;">
-    <h1>OASIS<br>予約希望フォーム</h1>
+    <div class="form-area" id="formArea" style="display:none;">
+        <h1>OASIS<br>予約希望フォーム</h1>
+
+    <!-- 進捗具合バー -->
+    <div class="step-progress">
+        <div class="step" id="step-0"><span class="circle">1</span><p>顧客情報</p></div>
+        <div class="line"></div>
+        <div class="step" id="step-1"><span class="circle">2</span><p>日付</p></div>
+        <div class="line"></div>
+        <div class="step" id="step-2"><span class="circle">3</span><p>メニュー</p></div>
+        <div class="line"></div>
+        <div class="step" id="step-3"><span class="circle">4</span><p>スタイリスト</p></div>
+    </div>
+
 
         <!-- 確認エリア -->
     <div id="reservationSummary" style="display: none;">
