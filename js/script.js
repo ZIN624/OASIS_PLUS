@@ -65,8 +65,8 @@ agreeBtn.addEventListener('click', () => {
 const specialWorkingDays = [
   '2025-12-29',
   '2025-12-30',
-  '2026-1-5',
-  '2026-1-6',
+  '2026-01-05',
+  '2026-01-06',
 ];
 
 const holidays = [
@@ -604,4 +604,5 @@ document.getElementById('agreeCheckbox').addEventListener('click', function () {
     alert(`エラー: ${error.message}`);
   });
 });
+
 
