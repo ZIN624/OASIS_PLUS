@@ -67,6 +67,8 @@
 }
 
 .calendar-picker {
+  width: 100%;
+  max-width: 100%;
   border: 1px solid #ccd8d0;
   border-radius: 0.5rem;
   background: #f3f3f3;
@@ -132,7 +134,8 @@
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
   &__day {
@@ -142,7 +145,14 @@
     border-radius: 0;
     background: #fff;
     color: #2f3438;
-    min-height: 3rem;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.95rem;
     font-weight: 500;
     box-shadow: none;
