@@ -1,4 +1,13 @@
 ﻿(function () {
+  window.AppState = window.AppState || {};
+  const STORAGE_MENU_KEY = "lastSelectedMenu";
+  const STORAGE_STYLIST_KEY = "lastSelectedStylist";
+
+  function setCustomerStatus(status) {
+    window.AppState.customerStatus = status;
+    localStorage.setItem("customerStatus", status);
+  }
+
   function showOnly(sectionIds, targetId) {
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
@@ -29,6 +38,8 @@
         card.classList.add("selected");
 
         if (selectedMenuInput) selectedMenuInput.value = card.dataset.menu || "";
+        localStorage.setItem(STORAGE_MENU_KEY, card.dataset.menu || "");
+
         if (otherInputContainer) {
           otherInputContainer.style.display = card.dataset.menu === "その他" ? "block" : "none";
         }
@@ -40,13 +51,49 @@
     stylistContainer?.addEventListener("click", (event) => {
       const card = event.target.closest(".stylist-card");
       if (!card) return;
+
       document.querySelectorAll(".stylist-card").forEach((c) => c.classList.remove("selected"));
       card.classList.add("selected");
       if (selectedStylistInput) selectedStylistInput.value = card.dataset.stylist || "";
+      localStorage.setItem(STORAGE_STYLIST_KEY, card.dataset.stylist || "");
+
       if (card.dataset.status === "restricted" || card.dataset.stylist === "岡崎菜月") {
         alert("現在育休中で予約制限中です。場合によっては予約を受けられない場合もございます。ご了承ください。");
       }
     });
+  }
+
+  function applySavedSelectionsForRepeat() {
+    const menuValue = localStorage.getItem(STORAGE_MENU_KEY) || "";
+    const stylistValue = localStorage.getItem(STORAGE_STYLIST_KEY) || "";
+    const selectedMenuInput = document.getElementById("selectedMenuInput");
+    const selectedStylistInput = document.getElementById("selectedStylistInput");
+    const otherInputContainer = document.getElementById("other-input-container");
+
+    if (menuValue) {
+      const menuCard = Array.from(document.querySelectorAll(".menu-card")).find(
+        (card) => card.dataset.menu === menuValue
+      );
+      if (menuCard) {
+        document.querySelectorAll(".menu-card").forEach((c) => c.classList.remove("selected"));
+        menuCard.classList.add("selected");
+        if (selectedMenuInput) selectedMenuInput.value = menuValue;
+        if (otherInputContainer) {
+          otherInputContainer.style.display = menuValue === "その他" ? "block" : "none";
+        }
+      }
+    }
+
+    if (stylistValue) {
+      const stylistCard = Array.from(document.querySelectorAll(".stylist-card")).find(
+        (card) => card.dataset.stylist === stylistValue
+      );
+      if (stylistCard) {
+        document.querySelectorAll(".stylist-card").forEach((c) => c.classList.remove("selected"));
+        stylistCard.classList.add("selected");
+        if (selectedStylistInput) selectedStylistInput.value = stylistValue;
+      }
+    }
   }
 
   function attachChoiceButtons() {
@@ -120,12 +167,20 @@
       showOnly(sectionIds, "formArea");
       setReservationVisible();
       if (window.populateDateOptions) window.populateDateOptions("day1");
+      if (window.AppState.customerStatus === "再来") {
+        applySavedSelectionsForRepeat();
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     showOnly(sectionIds, "select");
 
     const customer = window.CustomerStorage?.getCustomer();
+    const savedStatus = localStorage.getItem("customerStatus");
+    if (savedStatus) {
+      window.AppState.customerStatus = savedStatus;
+    }
+
     if (customer) {
       const username = document.getElementById("username");
       const furigana = document.getElementById("furigana");
@@ -143,8 +198,14 @@
       const button = event.target.closest("[data-mode]");
       if (!button) return;
       const mode = button.dataset.mode;
-      if (mode === "new") showOnly(sectionIds, "new");
-      if (mode === "existing") showOnly(sectionIds, "existing");
+      if (mode === "new") {
+        setCustomerStatus("新規");
+        showOnly(sectionIds, "new");
+      }
+      if (mode === "existing") {
+        setCustomerStatus("再来");
+        showOnly(sectionIds, "existing");
+      }
     });
 
     backToTopFromNew?.addEventListener("click", () => showOnly(sectionIds, "select"));
@@ -153,6 +214,10 @@
     customerForm?.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!window.FormValidator?.validateCustomerForm()) return;
+
+      if (!window.AppState.customerStatus) {
+        setCustomerStatus("新規");
+      }
 
       const customerData = {
         username: document.getElementById("username")?.value.trim() || "",
@@ -166,6 +231,7 @@
     });
 
     existingSameBtn?.addEventListener("click", () => {
+      setCustomerStatus("再来");
       const saved = window.CustomerStorage?.getCustomer();
       if (!saved?.username || !saved?.furigana || !saved?.gender || !saved?.phoneNumber) {
         alert("顧客情報が未登録です。先に顧客情報を登録してください。");
@@ -176,6 +242,7 @@
     });
 
     existingChangeBtn?.addEventListener("click", () => {
+      setCustomerStatus("再来");
       showOnly(sectionIds, "new");
     });
 

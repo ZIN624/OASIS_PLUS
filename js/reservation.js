@@ -12,9 +12,11 @@
   function collectReservationData() {
     const customer = window.CustomerStorage?.getCustomer() || {};
     const selectedMenu = document.getElementById("selectedMenuInput")?.value.trim() || "";
+    const customerStatus = window.AppState?.customerStatus || localStorage.getItem("customerStatus") || "新規";
 
     return {
       customer,
+      customerStatus,
       menu: selectedMenu,
       otherMenu: document.getElementById("otherMenuInput")?.value.trim() || "",
       stylist: document.getElementById("selectedStylistInput")?.value.trim() || "",
@@ -30,6 +32,7 @@
       <p><strong>予約者名:</strong> ${data.customer.username || "未登録"}</p>
       <p><strong>フリガナ:</strong> ${data.customer.furigana || "未登録"}</p>
       <p><strong>性別:</strong> ${data.customer.gender || "未登録"}</p>
+      <p><strong>ステータス:</strong> ${data.customerStatus || "新規"}</p>
       <p><strong>電話番号:</strong> ${data.customer.phoneNumber || "未登録"}</p>
       <p><strong>メニュー:</strong> ${menuText || "未選択"}</p>
       <p><strong>担当スタイリスト:</strong> ${data.stylist || "未選択"}</p>
@@ -45,15 +48,18 @@
 
     return [
       "予約希望メッセージ",
-      "",
       `予約者名: ${data.customer.username || "未登録"}`,
       `フリガナ: ${data.customer.furigana || "未登録"}`,
       `性別: ${data.customer.gender || "未登録"}`,
+      `ステータス: ${data.customerStatus || "新規"}`,
       `電話番号: ${data.customer.phoneNumber || "未登録"}`,
       `メニュー: ${menuText || "未選択"}`,
       `担当スタイリスト: ${data.stylist || "未選択"}`,
       ...data.preferences.map((p, i) => `第${i + 1}希望: ${p.date} ${p.time}`),
       `備考: ${data.comments || "なし"}`,
+      "",
+      "ご予約希望ありがとうございます！",
+      "確認いたしますのでお待ちください！",
     ].join("\n");
   }
 
@@ -66,6 +72,7 @@
     const reservationSummary = document.getElementById("reservationSummary");
     const summaryDetails = document.getElementById("summaryDetails");
     const summaryScrollHint = document.getElementById("summaryScrollHint");
+    const formArea = document.getElementById("formArea");
 
     let latestReservationData = null;
     let isSubmitButtonVisible = false;
@@ -132,7 +139,7 @@
       if (reservationForm) reservationForm.style.display = "none";
       if (reservationSummary) reservationSummary.style.display = "block";
 
-      reservationSummary?.scrollIntoView({ behavior: "smooth", block: "start" });
+      formArea?.scrollIntoView({ behavior: "smooth", block: "start" });
       refreshSummaryHint();
     });
 

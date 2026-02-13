@@ -597,6 +597,7 @@ label input[type="radio"] {
   border: 1px solid #d6e2da;
   border-radius: 0.625rem;
   padding: 0.35rem 0.5rem;
+  overflow: hidden;
 }
 
 .scroll-hint.is-visible {
@@ -624,11 +625,11 @@ label input[type="radio"] {
 @keyframes scroll-bounce {
   0%,
   100% {
-    transform: rotate(45deg) translate(0, 0);
-    opacity: 0.35;
+    transform: rotate(45deg) translateY(0);
+    opacity: 0.5;
   }
   50% {
-    transform: rotate(45deg) translate(0.24rem, 0.24rem);
+    transform: rotate(45deg) translateY(0.12rem);
     opacity: 1;
   }
 }

@@ -70,29 +70,35 @@
     const otherMenu = document.getElementById("otherMenuInput")?.value.trim() || "";
 
     let isValid = true;
+    let firstInvalidElement = null;
 
     if (!day1 || !time1) {
       alert("第1希望の日程を選択してください。");
       isValid = false;
+      firstInvalidElement = firstInvalidElement || document.querySelector('.calendar-picker[data-for="day1"]') || document.getElementById("day1");
     }
 
     if (!selectedMenu) {
       setCustomError("menuError", "メニューを選択してください", "menu-container");
       isValid = false;
+      firstInvalidElement = firstInvalidElement || document.getElementById("menuSectionTitle") || document.getElementById("menu-container");
     }
 
     if (selectedMenu === "その他" && !otherMenu) {
       setCustomError("otherMenuError", "その他メニューの内容を入力してください", "otherMenuInput");
       isValid = false;
+      firstInvalidElement = firstInvalidElement || document.getElementById("otherMenuInput");
     }
 
     if (!selectedStylist) {
       setCustomError("stylistError", "担当スタイリストを選択してください", "stylist-container");
       isValid = false;
+      firstInvalidElement = firstInvalidElement || document.getElementById("stylistSectionTitle") || document.getElementById("stylist-container");
     }
 
     if (!isValid) {
       alert("予約情報の入力内容を確認してください。");
+      firstInvalidElement?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     return isValid;
