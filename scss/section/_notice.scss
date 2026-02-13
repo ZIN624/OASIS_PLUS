@@ -1,0 +1,87 @@
+﻿@use "../variables/color" as vars;
+
+.select {
+  min-height: 60vh;
+  display: grid;
+  gap: 0.75rem;
+  align-content: center;
+  justify-items: center;
+  padding: 1rem;
+
+  > button {
+    width: min(100%, 22rem);
+  }
+}
+
+.notice,
+.mode-panel {
+  border: 1px solid vars.$color-border;
+  border-radius: 0.875rem;
+  background: vars.$color-surface;
+  box-shadow: 0 0.5rem 1.375rem vars.$color-boxshadow;
+  padding: 1rem;
+  animation: panel-in 0.25s ease;
+}
+
+.notice {
+  &__title {
+    text-align: center;
+    color: vars.$color-primary-strong;
+    margin-bottom: 0.9rem;
+  }
+
+  &__text {
+    p {
+      font-size: 0.96rem;
+    }
+  }
+}
+
+.existing-question {
+  margin-bottom: 0.9rem;
+}
+
+.existing-actions {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  color: vars.$color-text-gray;
+}
+
+.checkbox-box {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  accent-color: vars.$color-primary;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 40rem) {
+  .select {
+    min-height: 50vh;
+    grid-template-columns: 1fr 1fr;
+
+    > button {
+      width: 100%;
+      max-width: 18rem;
+    }
+  }
+}

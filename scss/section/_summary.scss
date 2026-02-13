@@ -1,0 +1,47 @@
+﻿@use "../variables/color" as vars;
+
+#reservationSummary {
+  padding: 0.95rem;
+  border: 1px solid vars.$color-border;
+  border-radius: 0.875rem;
+  background: vars.$color-surface;
+  box-shadow: 0 0.5rem 1.375rem vars.$color-boxshadow;
+}
+
+#summaryDetails {
+  margin-top: 0.65rem;
+  padding: 0.7rem;
+  border: 1px solid vars.$color-border;
+  border-radius: 0.625rem;
+  background: vars.$color-surface-soft;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.95rem;
+
+  p {
+    margin: 0.08rem 0;
+    line-height: 1.2;
+  }
+}
+
+#agreement-summary {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: 1px solid vars.$color-border;
+  border-radius: 0.75rem;
+  background: #f6fbf8;
+
+  ul {
+    margin: 0.62rem 0;
+    padding-left: 1.2rem;
+  }
+
+  li {
+    margin-bottom: 0.34rem;
+
+    &.highlighted {
+      color: #b72a2a;
+      font-weight: 700;
+    }
+  }
+}

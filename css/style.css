@@ -1,0 +1,434 @@
+/* 基本的なスタイル */
+
+
+.title {
+  font-size: 1.6em;
+  color: #4CAF50;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-wrapper {
+  margin: 10px;
+}
+
+.input-label {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.input-select,
+.input-field,
+.input-textarea {
+  font-size: 1em;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.input-select:focus,
+.input-field:focus,
+.input-textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background-color: #fff;
+}
+
+button {
+  padding: 12px;
+  font-size: 1.5em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  height: 100px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#other-input-container {
+  display: none;
+}
+
+#addSecondChoice, #addThirdChoice {
+  margin: 10px 0;
+  height: 60px;
+  font-size: 1.5em;
+}
+
+/* 土日を赤く表示 */
+.red-day {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 送信ボタンのスタイル */
+#submitReservation {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 32px;
+}
+
+#submitReservation:hover {
+  background-color: #4CAF50;
+}
+
+/* モーダル関連 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+  overflow: auto;
+  font-size: 18px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.btn:hover {
+  background-color: #317534;
+}
+
+#summaryDetails {
+  font-size: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 確認エリアのスタイル */
+#reservationSummary {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#reservationSummary h2 {
+  text-align: center;
+  font-size: 2em;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+#reservationSummary p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+#reservationSummary .section-title {
+  font-size: 1.4em;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#reservationSummary .section {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+#reservationSummary strong {
+  color: #4CAF50;
+}
+
+#reservationSummary .highlight {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+/* ボタンのサイズ調整 */
+#editReservation, #confirmReservation {
+  font-size: 30px;
+  padding: 12px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  #reservationSummary {
+    padding: 10px;
+  }
+}
+
+/* 横長ボックスのデザイン */
+.required {
+  color: white;
+  background-color: red;
+  padding: 2px 10px;
+  font-size: 0.5em;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+/* 同意事項のセクション */
+#agreement-summary {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#agreement-summary h3 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#agreement-summary ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+#agreement-summary ul li {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+  color: red;
+}
+
+.highlighted {
+  font-weight: bold;
+}
+
+#agreement-summary label {
+  font-size: 1.6em;
+  color: #4CAF50;
+  cursor: pointer;
+}
+
+/* チェックボックスのスタイル */
+#agreement-summary input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+#reservationSummary .required {
+  font-size: 1.2em;
+  color: red;
+  font-weight: bold;
+}
+
+/* メニューコンテナ */
+#menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.menu-card {
+  flex: 0 1 calc(50% - 15px); /* flexプロパティを調整 */
+  max-width: 250px;  /* 最大幅を少し小さく */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;  /* パディングを調整 */
+  margin: 5px;  /* 追加のマージン */
+  box-sizing: border-box;
+}
+
+.menu-card:hover {
+  transform: translateY(-10px); /* ホバー時に浮き上がるエフェクト */
+}
+
+.menu-card.selected {
+  border: 3px solid #4CAF50; /* 選択されたメニューカードの枠線 */
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15); /* 選択時の影 */
+  background-color: #f9fff9; /* 選択時の背景色 */
+}
+
+.menu-image img {
+  width: 100%; /* 画像を親要素に合わせる */
+  height: auto; /* アスペクト比を保つ */
+  max-width: 100%; /* 親要素を超えないようにする */
+  border-bottom: 1px solid #ddd;
+}
+@media (min-width: 768px) {
+  .menu-card {
+    flex: 0 1 calc(33.33% - 15px);
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-card {
+    flex: 0 1 calc(100% - 10px);
+    max-width: 100%;
+    margin: 5px 0;
+  }
+}
+
+/* スタイリストカードコンテナ */
+#stylist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stylist-card {
+  flex: 0 1 calc(50% - 15px);
+  max-width: 250px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.stylist-card:hover {
+  transform: translateY(-10px);
+}
+
+.stylist-card.selected {
+  border: 3px solid #4CAF50;
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+  background-color: #f9fff9;
+}
+
+/* スタイリスト画像のスタイル */
+.stylist-image img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  }
+
+.stylist-info {
+  padding: 10px;
+}
+
+.stylist-info h3 {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.stylist-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #666;
+}
+
+@media (min-width: 768px) {
+  #stylist-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .stylist-card {
+    flex: 0 1 calc(33.33% - 15px);
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stylist-card {
+    flex: 0 1 calc(100% - 10px);
+    max-width: 100%;
+    margin: 5px 0;
+  }
+}
+/* スマホ向けにスタイリスト画像のサイズを制限 */
+@media screen and (max-width: 767px) {
+  .stylist-image img {
+    max-width: 80%;   /* スタイリスト画像が親要素の幅の80%以内で表示される */
+    margin: 0 auto;   /* 中央揃え */
+  }
+}
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.error-field {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}

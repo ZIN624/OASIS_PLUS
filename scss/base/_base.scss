@@ -1,0 +1,55 @@
+﻿@use "../variables/color" as vars;
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+  background: linear-gradient(180deg, #edf5ef 0%, vars.$color-background 52%, #f8fbf9 100%);
+  color: vars.$color-text-base;
+  line-height: 1.55;
+}
+
+section {
+  width: min(100% - 1rem, 47.5rem);
+  margin: 0.75rem auto;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  padding: 1.1rem 1rem;
+  border-radius: 0.875rem;
+  text-align: center;
+  color: vars.$color-white;
+  background: linear-gradient(120deg, vars.$color-primary 0%, #38a66a 100%);
+  box-shadow: 0 0.5rem 1.375rem vars.$color-boxshadow;
+  font-size: clamp(1.38rem, 3.2vw + 0.8rem, 1.95rem);
+}
+
+h2 {
+  font-size: clamp(1.1rem, 2vw + 0.65rem, 1.36rem);
+}
+
+h3 {
+  font-size: clamp(1rem, 1.4vw + 0.7rem, 1.14rem);
+}
+
+@media (min-width: 40rem) {
+  section {
+    width: min(100% - 2rem, 51.25rem);
+    margin: 1rem auto;
+  }
+}

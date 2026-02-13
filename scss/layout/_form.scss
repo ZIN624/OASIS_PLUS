@@ -1,0 +1,64 @@
+﻿@use "../variables/color" as vars;
+
+.input-wrapper {
+  margin: 0.42rem 0;
+
+  .error-text {
+    margin: 0.25rem 0 0;
+    min-height: 1em;
+    color: vars.$color-text-red;
+    font-size: 0.83rem;
+  }
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.38rem;
+  font-size: 0.92rem;
+  color: vars.$color-text-gray;
+}
+
+.input-field,
+.input-select,
+.input-textarea,
+textarea,
+select,
+input[type="text"] {
+  width: 100%;
+  border: 1px solid vars.$color-border;
+  border-radius: 0.625rem;
+  background: vars.$color-white;
+  color: vars.$color-text-base;
+  padding: 0.78rem 0.8rem;
+  font-size: 1rem;
+
+  &:focus {
+    outline: 2px solid transparent;
+    border-color: #91c8a8;
+    box-shadow: 0 0 0 0.1875rem rgba(72, 160, 106, 0.14);
+  }
+
+  &.error-field {
+    border-color: #d83d3d !important;
+    box-shadow: 0 0 0 0.1875rem rgba(216, 61, 61, 0.12) !important;
+  }
+}
+
+option.closed-day {
+  color: #9aa39d;
+  background: #f1f3f2;
+}
+
+option.red-day {
+  color: #c73030;
+}
+
+.required {
+  display: inline-block;
+  margin-left: 0.4rem;
+  border-radius: 999px;
+  padding: 0.13rem 0.55rem;
+  font-size: 0.69rem;
+  color: vars.$color-white;
+  background: #d83333;
+}
